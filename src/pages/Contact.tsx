@@ -10,7 +10,12 @@ import {
   Phone, 
   Mail, 
   MapPin,
-  Send
+  Send,
+  Facebook,
+  XIcon,
+  Twitter,
+  TwitterIcon,
+  TicketCheckIcon
 } from "lucide-react";
 
 const Contact = () => {
@@ -18,26 +23,44 @@ const Contact = () => {
     {
       name: "LinkedIn",
       icon: <Linkedin className="w-6 h-6" />,
-      url: "https://linkedin.com/company/pekamy-freshminds",
+      url: "https://www.linkedin.com/company/pekamy-freshminds/",
       color: "hover:text-blue-600"
     },
     {
       name: "Instagram",
       icon: <Instagram className="w-6 h-6" />,
-      url: "https://instagram.com/pekamyfreshminds",
+      url: "https://www.instagram.com/pekamy_freshminds?igsh=MWdhaDk0ODlmdWt5eA==",
       color: "hover:text-pink-600"
     },
     {
       name: "WhatsApp",
       icon: <MessageCircle className="w-6 h-6" />,
-      url: "https://wa.me/1234567890",
+      url: "https://wa.me/+2348165590372",
       color: "hover:text-green-600"
     },
     {
       name: "Gmail",
       icon: <Mail className="w-6 h-6" />,
-      url: "mailto:contact@pekamyfreshminds.com",
+      url: "mailto:pekamyfreshmindsteam@gmail.com",
       color: "hover:text-red-600"
+    },
+    {
+      name: "Facebook",
+      icon: < Facebook className="w-6 h-6" />,
+      url: "https://www.facebook.com/share/14FUjmxamz7/",
+      color: "hover:text-blue-600"
+    },
+    {
+      name: "Twitter",
+      icon: < TwitterIcon className="w-6 h-6" />,
+      url: "https://x.com/pekamyFreshmind?t=rFQ-XrCNrNcH2BseVa4_5g&s=09",
+      color: "hover:text-blue-400"
+    },
+    {
+      name: "Tiktok",
+      icon: < TicketCheckIcon className="w-6 h-6" />,
+      url: "https://www.tiktok.com/@pekamyfresh.mind?_t=ZS-8yY5vad2haE&_r=1",
+      color: "hover:text-black-600"
     }
   ];
 
@@ -45,21 +68,16 @@ const Contact = () => {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
-      detail: "+1 (555) 123-4567",
-      link: "tel:+15551234567"
+      detail: "+234 816 559 0372",
+      link: "tel:+234 816 559 0372"
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
-      detail: "contact@pekamyfreshminds.com",
-      link: "mailto:contact@pekamyfreshminds.com"
+      detail: "pekamyfreshmindsteam@gmail.com",
+      link: "mailto:pekamyfreshmindsteam@gmail.com"
     },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Office",
-      detail: "123 Business Ave, Suite 100, City, State 12345",
-      link: "#"
-    }
+   
   ];
 
   return (
@@ -68,7 +86,7 @@ const Contact = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-            Get In Touch
+            Start Your Journey with us
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Ready to find your next great hire or dream job? We're here to help you succeed.

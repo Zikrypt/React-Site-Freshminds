@@ -1,24 +1,33 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 0;
+  text-align: left;
+  min-height: 100vh;
+  background: var(--gradient-mesh);
 }
 
+/* 2025 Logo animations */
 .logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  will-change: filter, transform;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-@keyframes logo-spin {
+.logo:hover {
+  filter: drop-shadow(0 0 3em hsl(295 45% 48% / 0.6));
+  transform: scale(1.05) rotate(2deg);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 3em hsl(180 100% 60% / 0.6));
+  transform: scale(1.05) rotate(-2deg);
+}
+
+/* Enhanced logo spin with 2025 styling */
+@keyframes logo-spin-2025 {
   from {
     transform: rotate(0deg);
   }
@@ -27,16 +36,164 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes logo-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px hsl(295 45% 48% / 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px hsl(295 45% 48% / 0.8));
   }
 }
 
-.card {
-  padding: 2em;
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin-2025 infinite 20s linear, logo-glow 3s ease-in-out infinite;
+  }
 }
 
+/* Modern card styling for 2025 */
+.card {
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(154, 78, 174, 0.1);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-glass);
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.card:hover:before {
+  transform: scaleX(1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-floating);
+  border-color: hsl(295 45% 48% / 0.3);
+}
+
+/* Enhanced read-the-docs for 2025 */
 .read-the-docs {
-  color: #888;
+  color: hsl(295 20% 60%);
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.read-the-docs:hover {
+  color: hsl(295 45% 48%);
+  transform: translateX(4px);
+}
+
+/* Modern page container */
+.page-container {
+  min-height: 100vh;
+  padding-top: 5rem; /* Fixed nav spacing */
+  background: var(--gradient-mesh);
+  position: relative;
+}
+
+/* Advanced loading states for 2025 */
+.skeleton {
+  background: linear-gradient(90deg, 
+    hsl(295 20% 95%) 25%, 
+    hsl(295 20% 90%) 50%, 
+    hsl(295 20% 95%) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 0.5rem;
+}
+
+/* Modern focus states */
+.focus-ring {
+  transition: var(--transition-smooth);
+}
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(295 45% 48% / 0.2);
+  border-color: hsl(295 45% 48%);
+}
+
+/* 2025 Interactive elements */
+.interactive-element {
+  cursor: pointer;
+  transition: var(--transition-bounce);
+  position: relative;
+}
+
+.interactive-element:hover {
+  transform: scale(1.02);
+}
+
+.interactive-element:active {
+  transform: scale(0.98);
+}
+
+/* Modern gradient overlays */
+.gradient-overlay {
+  position: relative;
+}
+
+.gradient-overlay:before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: inherit;
+}
+
+.gradient-overlay:hover:before {
+  opacity: 0.1;
+}
+
+/* Advanced typography for 2025 */
+.modern-text {
+  background: var(--gradient-hero);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Floating action elements */
+.floating-action {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: var(--shadow-elegant);
+  transition: var(--transition-smooth);
+  animation: float 4s ease-in-out infinite;
+}
+
+.floating-action:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-glow);
 }
