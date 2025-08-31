@@ -11,7 +11,7 @@ const Navigation = () => {
     { path: "/", label: "Home" },
     { path: "/Blog", label: "Blog" },
     { path: "/Screening", label: "Pekamy Entry Track" },
-    { path: "/Contact", label: "Contact Us" },
+    { path: "/Contact", label: "Contact" },
   ];
 
   const handleNavClick = (path: string) => {
@@ -125,36 +125,67 @@ const Navigation = () => {
             isMenuOpen ? 'opacity-100 delay-800' : 'opacity-0 delay-0'
           }`}
         >
-          <div className="text-center space-y-8">
-            {navItems.map((item, index) => (
-              <div
-                key={item.path}
-                className={`transform transition-all duration-600 ${
-                  isMenuOpen 
-                    ? 'translate-y-0 opacity-100 scale-100' 
-                    : 'translate-y-12 opacity-0 scale-90'
-                }`}
-                style={{ 
-                  transitionDelay: isMenuOpen ? `${900 + index * 100}ms` : '0ms'
-                }}
-              >
-                <Link
-                  to={item.path}
-                  className={`block text-4xl md:text-6xl font-bold text-white hover:bg-gradient-to-r hover:from-white hover:to-[#9a4eae] hover:bg-clip-text hover:text-transparent transition-all duration-300 transform hover:scale-110 hover:animate-bounce active:scale-95 ${
-                    location.pathname === item.path 
-                      ? 'bg-gradient-to-r from-white to-[#9a4eae] bg-clip-text text-transparent scale-105 animate-pulse' 
-                      : ''
-                  }`}
-                  onClick={() => handleNavClick(item.path)}
-                >
-                  {item.label}
-                </Link>
+          <div className="w-full max-w-6xl mx-auto px-8">
+            <div className="grid grid-cols-2 gap-x-16 gap-y-8 mb-16">
+              <div className="text-left space-y-8">
+                {navItems.slice(0, 2).map((item, index) => (
+                  <div
+                    key={item.path}
+                    className={`transform transition-all duration-600 ${
+                      isMenuOpen 
+                        ? 'translate-y-0 opacity-100 scale-100' 
+                        : 'translate-y-12 opacity-0 scale-90'
+                    }`}
+                    style={{ 
+                      transitionDelay: isMenuOpen ? `${900 + index * 100}ms` : '0ms'
+                    }}
+                  >
+                    <Link
+                      to={item.path}
+                      className={`block text-4xl md:text-6xl font-bold text-white hover:bg-gradient-to-r hover:from-white hover:to-[#9a4eae] hover:bg-clip-text hover:text-transparent transition-all duration-300 transform hover:scale-110 hover:animate-bounce active:scale-95 ${
+                        location.pathname === item.path 
+                          ? 'bg-gradient-to-r from-white to-[#9a4eae] bg-clip-text text-transparent scale-105 animate-pulse' 
+                          : ''
+                      }`}
+                      onClick={() => handleNavClick(item.path)}
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="text-right space-y-8">
+                {navItems.slice(2, 4).map((item, index) => (
+                  <div
+                    key={item.path}
+                    className={`transform transition-all duration-600 ${
+                      isMenuOpen 
+                        ? 'translate-y-0 opacity-100 scale-100' 
+                        : 'translate-y-12 opacity-0 scale-90'
+                    }`}
+                    style={{ 
+                      transitionDelay: isMenuOpen ? `${900 + (index + 2) * 100}ms` : '0ms'
+                    }}
+                  >
+                    <Link
+                      to={item.path}
+                      className={`block text-4xl md:text-6xl font-bold text-white hover:bg-gradient-to-r hover:from-white hover:to-[#9a4eae] hover:bg-clip-text hover:text-transparent transition-all duration-300 transform hover:scale-110 hover:animate-bounce active:scale-95 ${
+                        location.pathname === item.path 
+                          ? 'bg-gradient-to-r from-white to-[#9a4eae] bg-clip-text text-transparent scale-105 animate-pulse' 
+                          : ''
+                      }`}
+                      onClick={() => handleNavClick(item.path)}
+                    >
+                      {item.label}
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
             
             {/* Additional Contact Info */}
             <div 
-              className={`transform transition-all duration-600 mt-16 ${
+              className={`transform transition-all duration-600 ${
                 isMenuOpen 
                   ? 'translate-y-0 opacity-100 scale-100' 
                   : 'translate-y-12 opacity-0 scale-90'
