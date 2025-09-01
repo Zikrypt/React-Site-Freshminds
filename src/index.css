@@ -122,21 +122,38 @@
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     overflow-x: hidden; /* Prevent body horizontal scroll */
-    max-width: 100vw; /* Constrain body width to viewport width */
-    width: 100%; /* Ensure body takes full width */
+    max-width: 100%; /* Constrain body width */
+    /* Improved text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   html {
     scroll-behavior: smooth;
     overflow-x: hidden; /* Prevent html horizontal scroll */
-    max-width: 100vw; /* Constrain html width to viewport width */
-    width: 100%; /* Ensure html takes full width */
+    max-width: 100%; /* Constrain html width */
+    /* Ensure proper scaling */
+    font-size: 16px;
   }
 
-  /* Make images responsive by default */
+  /* Make images responsive by default with better handling */
   img {
     max-width: 100%;
     height: auto;
+    display: block;
+  }
+
+  /* Prevent horizontal scrolling from any element */
+  * {
+    max-width: 100%;
+  }
+
+  /* Better text handling */
+  h1, h2, h3, h4, h5, h6, p, span, div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 }
 
@@ -305,7 +322,7 @@
   transition: var(--transition-smooth);
   max-width: 100%; /* Prevent input overflow */
   width: 100%; /* Responsive width */
-  box-sizing: border-box;
+  min-width: 0; /* Allow shrinking */
 }
 
 .modern-input:focus {
@@ -323,7 +340,7 @@
   overflow: hidden;
   transition: var(--transition-smooth);
   max-width: 100%; /* Prevent button overflow */
-  box-sizing: border-box;
+  min-width: 0; /* Allow shrinking */
 }
 
 .btn-primary-2025:before {
@@ -356,11 +373,154 @@
   animation: pulse-2025 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* Additional responsive container fixes */
+/* Enhanced responsive container fixes */
 .container, .page-container {
-  max-width: 100vw; /* Use 100vw to ensure it respects viewport width */
+  max-width: 100%;
   overflow-x: hidden;
-  width: 100%; /* Ensure full width */
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive typography improvements */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+  
+  .text-6xl {
+    font-size: clamp(2rem, 8vw, 3.5rem) !important;
+  }
+  
+  .text-5xl {
+    font-size: clamp(1.75rem, 7vw, 3rem) !important;
+  }
+  
+  .text-4xl {
+    font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+  }
+  
+  .text-3xl {
+    font-size: clamp(1.25rem, 5vw, 2rem) !important;
+  }
+  
+  .text-2xl {
+    font-size: clamp(1.125rem, 4vw, 1.5rem) !important;
+  }
+  
+  .text-xl {
+    font-size: clamp(1rem, 3vw, 1.25rem) !important;
+  }
+}
+
+/* Improved grid and flex layouts */
+.grid {
+  display: grid;
+  min-width: 0;
+}
+
+.flex {
+  display: flex;
+  min-width: 0;
+}
+
+/* Better spacing on small screens */
+@media (max-width: 768px) {
+  .px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .py-20 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+  
+  .gap-8 {
+    gap: 1.5rem !important;
+  }
+  
+  .gap-6 {
+    gap: 1rem !important;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .px-4 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+  }
+  
+  .py-20 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Prevent any element from causing horizontal overflow */
+* {
   box-sizing: border-box;
 }
+
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Ensure all flex and grid children can shrink */
+.grid > *,
+.flex > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Better image handling in cards and containers */
+.card img,
+.container img,
+[class*="col"] img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+/* Responsive video embeds */
+video,
+iframe,
+embed,
+object {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix for potential table overflow */
+table {
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+/* Better handling of long URLs and text */
+.break-all {
+  word-break: break-all;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+
 

@@ -1,5 +1,5 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%; /* Changed from 1280px to allow full width scaling */
   margin: 0 auto;
   padding: 0 1rem; /* Added horizontal padding */
   text-align: left;
@@ -7,7 +7,13 @@
   background: var(--gradient-mesh);
   overflow-x: hidden; /* Prevent horizontal overflow */
   width: 100%; /* Ensure it doesn't exceed viewport */
-  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Add responsive max-width for better readability on very large screens */
+@media (min-width: 1400px) {
+  #root {
+    max-width: 1400px;
+  }
 }
 
 /* 2025 Logo animations */
@@ -18,7 +24,6 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   max-width: 100%; /* Prevent logo overflow */
-  box-sizing: border-box;
 }
 
 .logo:hover {
@@ -69,7 +74,9 @@
   overflow: hidden;
   max-width: 100%; /* Prevent card overflow */
   word-wrap: break-word; /* Handle long text */
-  box-sizing: border-box;
+  /* Add better text wrapping for all content */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .card:before {
@@ -115,7 +122,7 @@
   position: relative;
   overflow-x: hidden; /* Prevent horizontal overflow */
   max-width: 100%; /* Constrain width */
-  box-sizing: border-box;
+  width: 100%; /* Ensure full width usage */
 }
 
 /* Advanced loading states for 2025 */
@@ -183,6 +190,9 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: gradient-shift 8s ease infinite;
+  /* Ensure text doesn't break layout */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Floating action elements */
@@ -202,10 +212,9 @@
   box-shadow: var(--shadow-elegant);
   transition: var(--transition-smooth);
   animation: float 4s ease-in-out infinite;
-  /* Fixed positioning constraints */
+  /* Improved positioning constraints */
   max-width: calc(100vw - 4rem);
   max-height: calc(100vh - 4rem);
-  box-sizing: border-box;
 }
 
 .floating-action:hover {
@@ -213,18 +222,18 @@
   box-shadow: var(--shadow-glow);
 }
 
-/* Mobile responsive fixes */
+/* Enhanced mobile responsive fixes */
 @media (max-width: 768px) {
   #root {
     padding: 0 0.5rem;
     max-width: 100vw;
-    width: 100%; /* Ensure full width on smaller screens */
   }
   
   .card {
     padding: 1.5rem;
     margin: 0 auto;
-    width: 100%; /* Ensure full width on smaller screens */
+    /* Ensure cards don't overflow on small screens */
+    min-width: 0;
   }
   
   .floating-action {
@@ -236,8 +245,94 @@
   
   .page-container {
     padding-top: 3rem;
-    width: 100%; /* Ensure full width on smaller screens */
+  }
+  
+  /* Better text handling on mobile */
+  .modern-text {
+    font-size: clamp(1.5rem, 8vw, 4rem);
+    line-height: 1.2;
   }
 }
 
+/* Additional responsive breakpoints */
+@media (max-width: 480px) {
+  #root {
+    padding: 0 0.25rem;
+  }
+  
+  .card {
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  
+  .floating-action {
+    width: 2.5rem;
+    height: 2.5rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+  }
+}
 
+/* Large screen optimizations */
+@media (min-width: 1200px) {
+  .card {
+    padding: 3rem;
+  }
+}
+
+/* Prevent text overflow in all elements */
+* {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Ensure images are always responsive */
+img {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Fix for potential grid/flex overflow */
+.grid, .flex {
+  min-width: 0;
+}
+
+/* Container improvements */
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
