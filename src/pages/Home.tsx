@@ -145,6 +145,16 @@ const Home = () => {
       {/* Hero Section with proper spacing */}
       <section id="home" className="relative pt-28 pb-20 px-4 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
         <div className="absolute inset-0 mesh-gradient"></div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/images/background2.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            opacity: '0.9'
+          }}
+        ></div>
         <div className="container mx-auto text-center relative z-10 fade-in-section">
           <div className="flex justify-center mb-8">
             <div className="relative">
