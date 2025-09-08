@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, Briefcase, Target, ArrowUp, Sparkles, Zap, Shield, Award, CheckCircle, Star, Globe, TrendingUp } from "lucide-react";
+import { ArrowRight, Users, Briefcase, Target, ArrowUp, Sparkles, Zap, Shield, Award, CheckCircle, Star, Globe, TrendingUp, MessageSquare, Camera, Megaphone, BarChart3, UserPlus } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -27,6 +27,45 @@ const Home = () => {
       title: "Precision Screening",
       description: "Advanced screening processes and AI-powered matching ensure only the most qualified candidates reach you.",
       color: "from-pink-500 to-red-600"
+    }
+  ];
+
+  const digitalServices = [
+    {
+      icon: <MessageSquare className="w-8 h-8" />,
+      title: "Social Media Management",
+      description: "Comprehensive handling of all your marketing communications across Instagram, Facebook, LinkedIn, TikTok, and X (Twitter).",
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: <Camera className="w-8 h-8" />,
+      title: "Content Creation & Curation",
+      description: "Professional graphics and videos designed to drive engagement and attract customers to your business.",
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: <Megaphone className="w-8 h-8" />,
+      title: "Sponsored Ads Management",
+      description: "Strategic ad campaigns within your budget for maximum brand visibility, awareness, and customer acquisition.",
+      color: "from-orange-500 to-red-500"
+    },
+    {
+      icon: <Users className="w-8 h-8" />,
+      title: "Customer Relationship Management",
+      description: "Professional response handling to ensure smooth relationships with both existing and new customers.",
+      color: "from-green-500 to-teal-500"
+    },
+    {
+      icon: <UserPlus className="w-8 h-8" />,
+      title: "Digital Lead Generation",
+      description: "Strategic social media lead generation techniques to bring qualified prospects directly to your business.",
+      color: "from-indigo-500 to-purple-500"
+    },
+    {
+      icon: <BarChart3 className="w-8 h-8" />,
+      title: "Analytics & Growth Tracking",
+      description: "Comprehensive reporting and analytics to measure performance and optimize your digital marketing strategy.",
+      color: "from-pink-500 to-rose-500"
     }
   ];
 
@@ -215,6 +254,69 @@ const Home = () => {
                 <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center text-white animate-float">
                   <TrendingUp className="w-8 h-8" />
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Digital Marketing Services Section */}
+      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 fade-in-section">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-slide-up">
+            <div className="flex justify-center mb-6">
+              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-white animate-glow-pulse">
+                <Megaphone className="w-8 h-8" />
+              </div>
+            </div>
+            <Badge className="bg-blue-100 text-blue-800 mb-4">Pekamy Freshminds LTD</Badge>
+            <h2 className="text-5xl font-bold mb-6">
+              All-in-one <span className="modern-text">Growth Partner</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              At Pekamy Fresh Minds Ltd, we combine strategy and execution to give your business the visibility and support it needs.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-stagger">
+            {digitalServices.map((service, index) => (
+              <Card key={index} className="group hover-lift bg-white/90 backdrop-blur-sm border border-border/50 hover:border-primary/30 overflow-hidden relative service-card">
+                <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <CardContent className="p-8 text-center relative z-10">
+                  <div className={`w-20 h-20 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 text-white shadow-lg group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+                    {service.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                  
+                  <div className="mt-6 pt-4 border-t border-border/30">
+                    <div className="flex items-center justify-center space-x-2 text-sm text-primary font-medium">
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-16 animate-slide-up">
+            <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 p-8 rounded-3xl border border-primary/20 backdrop-blur-sm max-w-4xl mx-auto">
+              <h3 className="text-3xl font-bold mb-4 modern-text">Ready to Transform Your Digital Marketing?</h3>
+              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+                Partner with Pekamy Freshminds for comprehensive digital marketing solutions that deliver measurable results and sustainable growth for your business.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/contact">
+                  <Button size="lg" className="btn-primary-2025 px-8 py-4 text-lg hover-glow">
+                    Get Marketing Consultation
+                    <Megaphone className="ml-2 w-5 h-5" />
+                  </Button>
+                </Link>
+                <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
+                  View Portfolio
+                  <BarChart3 className="ml-2 w-5 h-5" />
+                </Button>
               </div>
             </div>
           </div>
@@ -575,9 +677,49 @@ const Home = () => {
         .animate-stagger > *:nth-child(3) { animation-delay: 0.5s; }
         .animate-stagger > *:nth-child(4) { animation-delay: 0.7s; }
         .animate-stagger > *:nth-child(5) { animation-delay: 0.9s; }
+        .animate-stagger > *:nth-child(6) { animation-delay: 1.1s; }
 
         .testimonial-transition {
           animation: scale-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .service-card {
+          transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+          transform: translateY(-8px) scale(1.02);
+        }
+
+        .modern-text {
+          background: linear-gradient(135deg, #9a4eae, #2f0033);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .floating-action {
+          position: fixed;
+          bottom: 2rem;
+          right: 2rem;
+          z-index: 50;
+          background: linear-gradient(135deg, #9a4eae, #2f0033);
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 3.5rem;
+          height: 3.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 25px rgba(154, 78, 174, 0.3);
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .floating-action:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 15px 35px rgba(154, 78, 174, 0.4);
         }
 
         @keyframes hero-float {
