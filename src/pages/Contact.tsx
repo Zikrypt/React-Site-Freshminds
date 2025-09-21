@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-
+import Footer from "@/components/Footer";
 import { 
   Instagram, 
   Linkedin, 
@@ -28,6 +28,7 @@ const Contact = () => {
     subject: '',
     message: ''
   });
+  const [heroStatsVisible, setHeroStatsVisible] = useState(false);
 
   const socialLinks = [
     {
@@ -102,10 +103,46 @@ const Contact = () => {
     console.log('Form submitted:', formData);
   };
 
+  // Custom hook for counting animation
+  const useCountAnimation = (endValue, startCounting) => {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+      if (!startCounting) return;
+      
+      let startTime = null;
+      const duration = 2000; // 2 seconds
+      
+      const animate = (currentTime) => {
+        if (startTime === null) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.floor(endValue * easeOutCubic));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setCount(endValue);
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    }, [endValue, startCounting]);
+    
+    return count;
+  };
+
+  // Count animations for contact stats
+  const contactResponseCount = useCountAnimation(24, heroStatsVisible);
+  const contactChannelsCount = useCountAnimation(7, heroStatsVisible);
+  const contactSatisfactionCount = useCountAnimation(100, heroStatsVisible);
+
   useEffect(() => {
-    // Intersection Observer for scroll animations
+    // Intersection Observer for scroll animations and counting triggers
     const observerOptions = {
-      threshold: 0.1,
+      threshold: 0.3,
       rootMargin: '0px 0px -50px 0px'
     };
 
@@ -113,11 +150,16 @@ const Contact = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
+          
+          // Trigger counting animations
+          if (entry.target.id === 'contact-hero-stats') {
+            setHeroStatsVisible(true);
+          }
         }
       });
     }, observerOptions);
 
-    const elements = document.querySelectorAll('.scroll-animate');
+    const elements = document.querySelectorAll('.scroll-animate, #contact-hero-stats');
     elements.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
@@ -126,13 +168,32 @@ const Contact = () => {
   return (
     <div className="min-h-screen page-enter">
       {/* Modern Hero Section */}
-      <section className="relative pt-16 md:pt-20 pb-20 px-4 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
+      <section className="relative pt-32 pb-20 px-4 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
         <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
         
         {/* Floating badges */}
         <div className="absolute top-20 left-10 floating-badge hidden lg:block">
-          <div className="glass-effect bg-primary/80 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
+          <div className="glass-effect bg-primary/80 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium flex items-center">
+            <Sparkles className="w-4 h-4 mr-2" />
             Let's Connect
+          </div>
+        </div>
+        <div className="absolute top-32 right-16 floating-badge hidden lg:block" style={{ animationDelay: '1s' }}>
+          <div className="glass-effect bg-secondary/80 text-secondary-foreground px-4 py-2 rounded-full text-sm font-medium flex items-center">
+            <Phone className="w-4 h-4 mr-2" />
+            24/7 Support
+          </div>
+        </div>
+        <div className="absolute bottom-32 left-16 floating-badge hidden lg:block" style={{ animationDelay: '2s' }}>
+          <div className="glass-effect bg-primary/80 text-primary-foreground px-4 py-2 rounded-full text-sm font-medium flex items-center">
+            <Users className="w-4 h-4 mr-2" />
+            Global Team
+          </div>
+        </div>
+        <div className="absolute bottom-40 right-10 floating-badge hidden lg:block" style={{ animationDelay: '2.5s' }}>
+          <div className="glass-effect bg-secondary/80 text-secondary-foreground px-4 py-2 rounded-full text-sm font-medium flex items-center">
+            <Mail className="w-4 h-4 mr-2" />
+            Quick Response
           </div>
         </div>
         
@@ -159,13 +220,36 @@ const Contact = () => {
               Ready to transform your career or find exceptional talent? We're here to help you succeed.
             </p>
           </div>
+
+          {/* Contact Stats - Similar to Home Hero */}
+          <div id="contact-hero-stats" className="hero-reveal hero-reveal-delay-3 grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8">
+            <div className="text-center">
+              <span className="text-3xl sm:text-4xl font-bold text-gradient">{contactResponseCount}hr</span>
+              <span className="block text-sm text-muted-foreground">Response Time</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl sm:text-4xl font-bold text-gradient">{contactChannelsCount}+</span>
+              <span className="block text-sm text-muted-foreground">Contact Channels</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl sm:text-4xl font-bold text-gradient">{contactSatisfactionCount}%</span>
+              <span className="block text-sm text-muted-foreground">Satisfaction Rate</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+          </div>
         </div>
       </section>
 
       {/* Contact Form and Info Section */}
-      <section className="py-12 md:py-24 px-4 overflow-x-hidden">
+      <section className="py-24 px-4">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-16">
             
             {/* Contact Form */}
             <div className="scroll-animate">
@@ -288,20 +372,20 @@ const Contact = () => {
                 <h3 className="text-3xl font-bold text-gradient mb-8">
                   Follow Us
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   {socialLinks.map((social, index) => (
                     <Card key={index} className="modern-card hover:scale-105 transition-transform duration-300">
-                      <CardContent className="p-3 sm:p-4">
+                      <CardContent className="p-4">
                         <a
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`flex flex-col items-center space-y-2 text-foreground ${social.color} transition-colors min-w-0`}
+                          className={`flex flex-col items-center space-y-2 text-foreground ${social.color} transition-colors`}
                         >
-                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-primary-foreground flex-shrink-0">
+                          <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-primary-foreground">
                             {social.icon}
                           </div>
-                          <span className="text-xs sm:text-sm font-medium text-center truncate w-full">{social.name}</span>
+                          <span className="text-sm font-medium">{social.name}</span>
                         </a>
                       </CardContent>
                     </Card>
@@ -317,17 +401,17 @@ const Contact = () => {
                       Office Hours
                     </h3>
                     <div className="space-y-3 text-foreground">
-                      <div className="flex justify-between items-start">
-                        <span className="text-sm sm:text-base flex-shrink-0">Monday - Friday:</span>
-                        <span className="font-medium text-sm sm:text-base text-right">9:00 AM - 6:00 PM</span>
+                      <div className="flex justify-between">
+                        <span>Monday - Friday:</span>
+                        <span className="font-medium">9:00 AM - 6:00 PM</span>
                       </div>
-                      <div className="flex justify-between items-start">
-                        <span className="text-sm sm:text-base flex-shrink-0">Saturday:</span>
-                        <span className="font-medium text-sm sm:text-base text-right">10:00 AM - 4:00 PM</span>
+                      <div className="flex justify-between">
+                        <span>Saturday:</span>
+                        <span className="font-medium">10:00 AM - 4:00 PM</span>
                       </div>
-                      <div className="flex justify-between items-start">
-                        <span className="text-sm sm:text-base flex-shrink-0">Sunday:</span>
-                        <span className="font-medium text-sm sm:text-base text-right">Closed</span>
+                      <div className="flex justify-between">
+                        <span>Sunday:</span>
+                        <span className="font-medium">Closed</span>
                       </div>
                     </div>
                     <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
@@ -363,7 +447,7 @@ const Contact = () => {
         </div>
       </section>
 
-      
+      <Footer />
     </div>
   );
 };

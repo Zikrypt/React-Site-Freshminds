@@ -21,6 +21,7 @@ const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [visibleArticles, setVisibleArticles] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
+  const [heroStatsVisible, setHeroStatsVisible] = useState(false);
 
   const articles = [
     {
@@ -101,10 +102,46 @@ const Blog = () => {
     }, 500);
   };
 
+  // Custom hook for counting animation
+  const useCountAnimation = (endValue, startCounting) => {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+      if (!startCounting) return;
+      
+      let startTime = null;
+      const duration = 2000; // 2 seconds
+      
+      const animate = (currentTime) => {
+        if (startTime === null) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.floor(endValue * easeOutCubic));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setCount(endValue);
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    }, [endValue, startCounting]);
+    
+    return count;
+  };
+
+  // Count animations for blog stats
+  const blogArticlesCount = useCountAnimation(50, heroStatsVisible);
+  const blogReadersCount = useCountAnimation(10, heroStatsVisible);
+  const blogRatingCount = useCountAnimation(4.8, heroStatsVisible);
+
   useEffect(() => {
-    // Intersection Observer for scroll animations
+    // Intersection Observer for scroll animations and counting triggers
     const observerOptions = {
-      threshold: 0.1,
+      threshold: 0.3,
       rootMargin: '0px 0px -50px 0px'
     };
 
@@ -112,11 +149,16 @@ const Blog = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view');
+          
+          // Trigger counting animations
+          if (entry.target.id === 'blog-hero-stats') {
+            setHeroStatsVisible(true);
+          }
         }
       });
     }, observerOptions);
 
-    const elements = document.querySelectorAll('.scroll-animate');
+    const elements = document.querySelectorAll('.scroll-animate, #blog-hero-stats');
     elements.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
@@ -127,6 +169,33 @@ const Blog = () => {
       {/* Modern Hero Section */}
       <section className="pt-28 pb-16 px-4 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+        
+        {/* Floating Badges */}
+        <div className="absolute top-20 left-10 floating-badge hidden lg:block">
+          <Badge className="glass-effect text-primary-foreground bg-primary/80 px-4 py-2 text-sm font-medium">
+            <TrendingUp className="w-4 h-4 mr-2" />
+            Latest Stories
+          </Badge>
+        </div>
+        <div className="absolute top-32 right-16 floating-badge hidden lg:block" style={{ animationDelay: '1s' }}>
+          <Badge className="glass-effect text-secondary-foreground bg-secondary/80 px-4 py-2 text-sm font-medium">
+            <Eye className="w-4 h-4 mr-2" />
+            10K+ Readers
+          </Badge>
+        </div>
+        <div className="absolute bottom-32 left-16 floating-badge hidden lg:block" style={{ animationDelay: '2s' }}>
+          <Badge className="glass-effect text-primary-foreground bg-primary/80 px-4 py-2 text-sm font-medium">
+            <Heart className="w-4 h-4 mr-2" />
+            Career Insights
+          </Badge>
+        </div>
+        <div className="absolute bottom-40 right-10 floating-badge hidden lg:block" style={{ animationDelay: '2.5s' }}>
+          <Badge className="glass-effect text-secondary-foreground bg-secondary/80 px-4 py-2 text-sm font-medium">
+            <BookOpen className="w-4 h-4 mr-2" />
+            Weekly Updates
+          </Badge>
+        </div>
+        
         <div className="container mx-auto text-center relative z-10 max-w-6xl">
           <div className="hero-reveal">
             <div className="flex justify-center mb-8">
@@ -147,6 +216,29 @@ const Blog = () => {
             <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
               Stories, solutions, and insights from the heart of Pekamy's mission to empower youth
             </p>
+          </div>
+
+          {/* Blog Stats - Similar to Home Hero */}
+          <div id="blog-hero-stats" className="hero-reveal hero-reveal-delay-3 grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8">
+            <div className="text-center">
+              <span className="text-3xl sm:text-4xl font-bold text-gradient">{blogArticlesCount}+</span>
+              <span className="block text-sm text-muted-foreground">Articles Published</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl sm:text-4xl font-bold text-gradient">{blogReadersCount}K+</span>
+              <span className="block text-sm text-muted-foreground">Monthly Readers</span>
+            </div>
+            <div className="text-center">
+              <span className="text-3xl sm:text-4xl font-bold text-gradient">{blogRatingCount.toFixed(1)}</span>
+              <span className="block text-sm text-muted-foreground">Average Rating</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>

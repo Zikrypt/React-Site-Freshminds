@@ -34,6 +34,8 @@ import { Link } from "react-router-dom";
 const Screening = () => {
   const [activeTrack, setActiveTrack] = useState('fast-track');
   const [visiblePhase, setVisiblePhase] = useState(0);
+  const [heroStatsVisible, setHeroStatsVisible] = useState(false);
+  const [successStatsVisible, setSuccessStatsVisible] = useState(false);
 
   const tracks = {
     'fast-track': {
@@ -201,6 +203,46 @@ const Screening = () => {
     { text: 'Dedication to complete the full program duration', icon: <Shield className="w-5 h-5 text-red-400" /> }
   ];
 
+  // Custom hook for counting animation
+  const useCountAnimation = (endValue, startCounting) => {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+      if (!startCounting) return;
+      
+      let startTime = null;
+      const duration = 2000; // 2 seconds
+      
+      const animate = (currentTime) => {
+        if (startTime === null) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.floor(endValue * easeOutCubic));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setCount(endValue);
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    }, [endValue, startCounting]);
+    
+    return count;
+  };
+
+  // Count animations for different sections
+  const heroPhaseCount = useCountAnimation(5, heroStatsVisible);
+  const heroTrackCount = useCountAnimation(3, heroStatsVisible);
+  const heroSuccessCount = useCountAnimation(98, heroStatsVisible);
+  
+  const finalResponseCount = useCountAnimation(24, successStatsVisible);
+  const finalSuccessCount = useCountAnimation(98, successStatsVisible);
+  const finalAlumniCount = useCountAnimation(1000, successStatsVisible);
+
   const skills = [
     { 
       category: 'Technical Skills', 
@@ -229,9 +271,9 @@ const Screening = () => {
   ];
 
   useEffect(() => {
-    // Intersection Observer for scroll animations
+    // Intersection Observer for scroll animations and counting triggers
     const observerOptions = {
-      threshold: 0.1,
+      threshold: 0.3,
       rootMargin: '0px 0px -50px 0px'
     };
 
@@ -239,11 +281,19 @@ const Screening = () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
+          
+          // Trigger counting animations based on element IDs
+          if (entry.target.id === 'hero-stats') {
+            setHeroStatsVisible(true);
+          }
+          if (entry.target.id === 'success-stats') {
+            setSuccessStatsVisible(true);
+          }
         }
       });
     }, observerOptions);
 
-    const elements = document.querySelectorAll('.fade-in-section');
+    const elements = document.querySelectorAll('.fade-in-section, #hero-stats, #success-stats');
     elements.forEach(el => observer.observe(el));
 
     return () => observer.disconnect();
@@ -295,37 +345,79 @@ const Screening = () => {
       {/* Header with proper spacing - Enhanced with HTML content */}
       <section className="pt-28 pb-16 px-4 bg-gradient-to-r from-[#9a4eae] via-[#2f0033] to-[#9a4eae] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
+        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+
+        {/* Floating badges */}
+        <div className="absolute top-20 left-10 floating-badge hidden lg:block">
+          <Badge className="glass-effect text-primary-foreground bg-white/20 px-4 py-2 text-sm font-medium flex items-center">
+            <Award className="w-4 h-4 mr-2" />
+            Government Approved
+          </Badge>
+        </div>
+        <div className="absolute top-32 right-16 floating-badge hidden lg:block" style={{ animationDelay: '1s' }}>
+          <Badge className="glass-effect text-white bg-white/20 px-4 py-2 text-sm font-medium flex items-center">
+            <Users className="w-4 h-4 mr-2" />
+            500+ Graduates
+          </Badge>
+        </div>
+        <div className="absolute bottom-32 left-16 floating-badge hidden lg:block" style={{ animationDelay: '2s' }}>
+          <Badge className="glass-effect text-white bg-white/20 px-4 py-2 text-sm font-medium flex items-center">
+            <Target className="w-4 h-4 mr-2" />
+            3 Track Options
+          </Badge>
+        </div>
+        <div className="absolute bottom-40 right-10 floating-badge hidden lg:block" style={{ animationDelay: '2.5s' }}>
+          <Badge className="glass-effect text-white bg-white/20 px-4 py-2 text-sm font-medium flex items-center">
+            <TrendingUp className="w-4 h-4 mr-2" />
+            98% Success Rate
+          </Badge>
+        </div>
+
         <div className="container mx-auto text-center relative z-10 fade-in-section">
           <div className="hero-content">
-            <div className="flex justify-center mb-6">
-              <div className="w-24 h-24 bg-white/30 rounded-3xl flex items-center justify-center backdrop-blur-sm animate-float shadow-lg">
-                <Rocket className="w-12 h-12" />
+            <div className="hero-reveal">
+              <div className="flex justify-center mb-6">
+                <div className="w-24 h-24 bg-white/30 rounded-3xl flex items-center justify-center backdrop-blur-sm animate-float shadow-lg floating-badge">
+                  <Rocket className="w-12 h-12" />
+                </div>
               </div>
+              
+              <Badge className="bg-white/30 text-white mb-4 px-4 py-2 text-sm font-medium backdrop-blur-sm">
+                Government Approved Program
+              </Badge>
+              
+              <h1 className="text-5xl md:text-6xl font-bold mb-6">Pekamy Entry Track</h1>
+              <div className="text-3xl md:text-4xl font-bold mb-8 text-purple-200">PET</div>
             </div>
             
-            <Badge className="bg-white/30 text-white mb-4 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-              Government Approved Program
-            </Badge>
-            
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Pekamy Entry Track</h1>
-            <div className="text-3xl md:text-4xl font-bold mb-8 text-purple-200">PET</div>
-            
-            {/* Hero content from HTML */}
-            <h2 className="hero-title text-3xl md:text-4xl font-bold mb-8">Discover, Learn, and Grow with Entry Track</h2>
-            
-            <div className="hero-stats mb-8">
-              <div className="stat-item">
-                <span className="stat-number text-xl md:text-2xl font-bold text-purple-200 block mb-2">
-                  "Careful selection, lasting Impact"
-                </span>
-              </div>
+            <div className="hero-reveal hero-reveal-delay-1">
+              {/* Hero content from HTML */}
+              <h2 className="hero-title text-3xl md:text-4xl font-bold mb-8">Discover, Learn, and Grow with Entry Track</h2>
             </div>
             
-            <p className="text-lg md:text-xl opacity-95 max-w-4xl mx-auto mb-12 leading-relaxed">
-              The <strong>Pekamy Entry Track (PET)</strong> is our flagship onboarding framework designed to guide new talents — especially students, fresh graduates, and aspiring professionals — through a structured, mentorship-driven development journey into the modern workforce.
-            </p>
+            <div className="hero-reveal hero-reveal-delay-2">
+              {/* Hero Stats - Similar to Home Hero */}
+              <div id="hero-stats" className="hero-stats grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8 mb-8">
+                <div className="stat-item text-center">
+                  <span className="stat-number text-2xl md:text-3xl font-bold text-purple-200 block">{heroPhaseCount}</span>
+                  <span className="stat-label text-sm opacity-90">Phase Process</span>
+                </div>
+                <div className="stat-item text-center">
+                  <span className="stat-number text-2xl md:text-3xl font-bold text-purple-200 block">{heroTrackCount}</span>
+                  <span className="stat-label text-sm opacity-90">Track Options</span>
+                </div>
+                <div className="stat-item text-center">
+                  <span className="stat-number text-2xl md:text-3xl font-bold text-purple-200 block">{heroSuccessCount}%</span>
+                  <span className="stat-label text-sm opacity-90">Success Rate</span>
+                </div>
+              </div>
+
+              <p className="text-lg md:text-xl opacity-95 max-w-4xl mx-auto mb-12 leading-relaxed">
+                The <strong>Pekamy Entry Track (PET)</strong> is our flagship onboarding framework designed to guide new talents — especially students, fresh graduates, and aspiring professionals — through a structured, mentorship-driven development journey into the modern workforce.
+              </p>
+            </div>
             
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="hero-reveal hero-reveal-delay-3 flex flex-col sm:flex-row gap-6 justify-center">
               <Button size="lg" className="bg-white text-[#9a4eae] hover:bg-white/90 hover:scale-105 transition-all duration-300 px-8 py-4 text-lg font-semibold">
                 Apply Now
                 <ArrowRight className="ml-2 w-6 h-6" />
@@ -335,6 +427,13 @@ const Screening = () => {
                 Watch Demo
               </Button>
             </div>
+          </div>
+        </div>
+        
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
         
@@ -678,17 +777,17 @@ const Screening = () => {
               </Button>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            <div id="success-stats" className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">24hrs</div>
+                <div className="text-3xl font-bold mb-2">{finalResponseCount}hrs</div>
                 <div className="text-sm opacity-90">Response Time</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">98%</div>
+                <div className="text-3xl font-bold mb-2">{finalSuccessCount}%</div>
                 <div className="text-sm opacity-90">Success Rate</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold mb-2">1000+</div>
+                <div className="text-3xl font-bold mb-2">{finalAlumniCount}+</div>
                 <div className="text-sm opacity-90">Alumni Network</div>
               </div>
             </div>
