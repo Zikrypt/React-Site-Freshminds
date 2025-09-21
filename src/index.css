@@ -26,7 +26,7 @@
     --muted: 295 20% 95%;
     --muted-foreground: 295 20% 40%;
 
-    --accept: 295 45% 95%;
+    --accent: 295 45% 95%;
     --accent-foreground: 295 45% 15%;
 
     /* 2025 Modern gradients */
@@ -108,7 +108,7 @@
     --sidebar-primary: 224.3 76.3% 48%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accept-foreground: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
