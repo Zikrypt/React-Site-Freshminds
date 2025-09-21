@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Users, Briefcase, Target, ArrowUp, Sparkles, Zap, Shield, Award, CheckCircle, Star, Globe, TrendingUp, MessageSquare, Camera, Megaphone, BarChart3, UserPlus } from "lucide-react";
+import { ArrowRight, Users, Briefcase, Target, ArrowUp, Sparkles, Zap, Shield, Award, CheckCircle, Star, Globe, TrendingUp, MessageSquare, Camera, Megaphone, BarChart3, UserPlus, ChevronLeft, ChevronRight, Info, Route, Mail, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentServiceSlide, setCurrentServiceSlide] = useState(0);
 
   const features = [
     {
@@ -100,6 +101,56 @@ const Home = () => {
     { number: "98%", label: "Satisfaction Rate", icon: <Star className="w-6 h-6" /> }
   ];
 
+  // Added from HTML: How it Works steps
+  const howItWorks = [
+    {
+      step: "1",
+      title: "Submit Your Details",
+      description: "Talents send their full names, skillsets, Job interest, location, and phone number.",
+      icon: <UserPlus className="w-6 h-6" />
+    },
+    {
+      step: "2",
+      title: "Screening & Talent Webinars",
+      description: "We organize mandatory webinars to guide talents on what to expect, how to stand out, and how the Pekamy Entry Track (PET) works.",
+      icon: <Users className="w-6 h-6" />
+    },
+    {
+      step: "3",
+      title: "PET Programs",
+      description: "A structured onboarding phase where top-tier candidates are fast-tracked (minimum of 3 months), while intermediate candidates continue longer based on performance and learning pace.",
+      icon: <Route className="w-6 h-6" />
+    },
+    {
+      step: "4",
+      title: "Screening & Evaluation",
+      description: "Candidates are assessed for skills, communication, and work-readiness through tasks and guided mentorship.",
+      icon: <Target className="w-6 h-6" />
+    },
+    {
+      step: "5",
+      title: "Pairing with Opportunities",
+      description: "After evaluation, successful talents are matched with internships, freelance gigs, or job placements.",
+      icon: <Briefcase className="w-6 h-6" />
+    }
+  ];
+
+  // Added from HTML: Key benefits
+  const keyBenefits = [
+    {
+      title: "Paid Internships Placements",
+      icon: <Briefcase className="w-8 h-8" />
+    },
+    {
+      title: "Mentorship & Feedback", 
+      icon: <Users className="w-8 h-8" />
+    },
+    {
+      title: "Admin Support to protect your interest",
+      icon: <Shield className="w-8 h-8" />
+    }
+  ];
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -107,7 +158,19 @@ const Home = () => {
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
+      
+      // Add scroll animation observer
+      const elements = document.querySelectorAll('.scroll-animate');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('in-view');
+        }
+      });
     };
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -117,247 +180,350 @@ const Home = () => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   useEffect(() => {
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.fade-in-section');
-    elements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
+    const interval = setInterval(() => {
+      setCurrentServiceSlide((prev) => (prev + 1) % Math.ceil(digitalServices.length / 3));
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="min-h-screen relative page-transition">
-      {/* Hero Section with proper spacing */}
-      <section id="home" className="relative pt-28 pb-20 px-4 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
-        <div className="absolute inset-0 mesh-gradient"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/images/background2.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            opacity: '0.9'
-          }}
-        ></div>
-        <div className="container mx-auto text-center relative z-10 fade-in-section">
-          <div className="flex justify-center mb-8">
-            <div className="relative">
-              <div className="w-24 h-24 bg-gradient-primary rounded-3xl flex items-center justify-center text-white animate-float shadow-glow">
-                <Sparkles className="w-12 h-12" />
-              </div>
-              <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full animate-pulse"></div>
+    <div className="min-h-screen relative page-enter overflow-hidden">
+      {/* Header Navigation - Updated with HTML content */}
+      <header className="main-header fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b">
+        <div className="header-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="logo-section">
+              <h1 className="blog-title text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Pekamy Freshminds
+              </h1>
+              <p className="blog-subtitle text-xs text-muted-foreground">Your Next Chapter Starts Here</p>
             </div>
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-slide-up">
-            <span className="block text-foreground">Pekamy Freshminds</span>
-            <span className="block modern-text text-5xl md:text-6xl mt-2">
-              Your Next Chapter Starts Here
-            </span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto animate-slide-up" style={{animationDelay: '0.2s'}}>
-            Unleashing Potential, Creating Impact. Where ambition meets possibility in the modern workplace.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16 animate-slide-up" style={{animationDelay: '0.4s'}}>
-            <Link to="/contact">
-              <Button size="lg" className="btn-primary-2025 px-8 py-4 text-lg hover-glow">
-                Start Your Journey
-                <ArrowRight className="ml-2 w-6 h-6" />
-              </Button>
-            </Link>
-            <Link to="/screening">
-              <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
-                Explore PET Program
-                <Zap className="ml-2 w-6 h-6" />
-              </Button>
-            </Link>
-          </div>
-          
-          {/* Hero Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto animate-slide-up" style={{animationDelay: '0.6s'}}>
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="w-16 h-16 bg-white/80 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4 text-primary shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                  {stat.icon}
-                </div>
-                <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
-              </div>
-            ))}
+            
+            <nav className="main-nav hidden md:block">
+              <ul className="nav-list flex items-baseline space-x-4">
+                <li>
+                  <a href="#about" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Info className="w-4 h-4 mr-1" /> About
+                  </a>
+                </li>
+                <li>
+                  <Link to="/pet" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Route className="w-4 h-4 mr-1" /> Pekamy Entry Track
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Mail className="w-4 h-4 mr-1" /> Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <BookOpen className="w-4 h-4 mr-1" /> Our Blog
+                  </Link>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-primary rounded-full opacity-10 animate-morph"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-gradient-primary rounded-full opacity-10 animate-float" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 right-20 w-16 h-16 bg-gradient-primary rounded-full opacity-5 animate-float" style={{animationDelay: '4s'}}></div>
-      </section>
+      </header>
 
-      {/* About Section */}
-      <section className="py-20 px-4 bg-white/90 backdrop-blur-sm fade-in-section">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="animate-slide-up">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center text-white">
-                  <Globe className="w-5 h-5" />
-                </div>
-                <Badge className="bg-primary/10 text-primary">About Pekamy</Badge>
-              </div>
-              
-              <h2 className="text-5xl font-bold mb-6 leading-tight">
-                Bridging the Gap Between 
-                <span className="modern-text block">Talent & Opportunity</span>
+      {/* Hero Section - Updated with HTML content */}
+      <section id="home" className="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background via-primary/5 to-secondary/10">
+        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+        
+        {/* Floating Badges */}
+        <div className="absolute top-20 left-10 floating-badge hidden lg:block">
+          <Badge className="glass-effect text-primary-foreground bg-primary/80 px-4 py-2 text-sm font-medium">
+            Fresh Minds
+          </Badge>
+        </div>
+        <div className="absolute top-32 right-16 floating-badge hidden lg:block" style={{ animationDelay: '1s' }}>
+          <Badge className="glass-effect text-secondary-foreground bg-secondary/80 px-4 py-2 text-sm font-medium">
+            500+ Graduates
+          </Badge>
+        </div>
+        <div className="absolute bottom-32 left-16 floating-badge hidden lg:block" style={{ animationDelay: '2s' }}>
+          <Badge className="glass-effect text-primary-foreground bg-primary/80 px-4 py-2 text-sm font-medium">
+            98% Success Rate
+          </Badge>
+        </div>
+        
+        <div className="hero-content relative z-10 text-center max-w-6xl mx-auto">
+          <div className="space-y-8">
+            <div className="hero-reveal">
+              <h1 className="display-text text-gradient text-center">
+                PEKAMY
+              </h1>
+            </div>
+            
+            <div className="hero-reveal hero-reveal-delay-1">
+              <h2 className="hero-title text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-tight">
+                Unleashing Potential, Creating Impact
               </h2>
-              
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                At Pekamy Freshminds, we connect skilled interns, NYSC members, students, graduates, and freshers with forward-thinking companies ready to grow.
+            </div>
+            
+            <div className="hero-reveal hero-reveal-delay-2">
+              <p className="hero-description text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Pekamy Freshminds, where ambition meets possibility.
               </p>
-              
-              <div className="space-y-4 mb-8">
-                {[
-                  { icon: <CheckCircle className="w-5 h-5 text-green-500" />, text: "Paid Internship Placements" },
-                  { icon: <CheckCircle className="w-5 h-5 text-green-500" />, text: "Mentorship & Professional Feedback" },
-                  { icon: <CheckCircle className="w-5 h-5 text-green-500" />, text: "Admin Support to Protect Your Interests" },
-                  { icon: <CheckCircle className="w-5 h-5 text-green-500" />, text: "Career Development & Growth Tracking" }
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center space-x-3 p-3 rounded-xl hover:bg-primary/5 transition-colors duration-300">
-                    {item.icon}
-                    <span className="font-medium">{item.text}</span>
-                  </div>
-                ))}
+            </div>
+
+            {/* Hero Stats - Added from HTML */}
+            <div className="hero-stats hero-reveal hero-reveal-delay-3 grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8">
+              <div className="stat-item text-center">
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">500+</span>
+                <span className="stat-label block text-sm text-muted-foreground">Students Empowered</span>
               </div>
-              
-              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-6 rounded-2xl border border-primary/20">
-                <p className="text-lg italic text-foreground leading-relaxed">
-                  "PFM is a growing community built to unlock career opportunities for individuals at every stage of their journey. Whether you're just starting out, looking to gain experience, or seeking to showcase your skills, Pekamy Freshminds bridges the gap between talent and opportunity."
-                </p>
+              <div className="stat-item text-center">
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">150+</span>
+                <span className="stat-label block text-sm text-muted-foreground">Partner Companies</span>
+              </div>
+              <div className="stat-item text-center">
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">1000+</span>
+                <span className="stat-label block text-sm text-muted-foreground">Success Stories</span>
               </div>
             </div>
             
-            <div className="flex justify-center animate-slide-up" style={{animationDelay: '0.3s'}}>
-              <div className="relative">
-                <div className="w-96 h-96 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl flex items-center justify-center shadow-floating hover:shadow-glow transition-all duration-500 hover:scale-105">
-                  <img src="/images/logo.png.jpg" alt="Pekamy Logo" className="w-80 h-80 object-contain" />
-                </div>
-                <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center text-white animate-glow-pulse">
-                  <Award className="w-6 h-6" />
-                </div>
-                <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center text-white animate-float">
-                  <TrendingUp className="w-8 h-8" />
-                </div>
-              </div>
+            <div className="hero-reveal hero-reveal-delay-3 flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+              <Button 
+                size="lg" 
+                className="btn-modern px-8 py-4 text-lg font-semibold rounded-xl"
+                asChild
+              >
+                <Link to="/screening">
+                  Start Your Journey
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="glass-effect border-2 px-8 py-4 text-lg font-semibold rounded-xl hover:bg-primary/10"
+                asChild
+              >
+                <Link to="/contact">
+                  Partner With Us
+                </Link>
+              </Button>
             </div>
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
 
-      {/* Digital Marketing Services Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 fade-in-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 animate-slide-up">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center text-white animate-glow-pulse">
-                <Megaphone className="w-8 h-8" />
+      {/* About Section - Enhanced with HTML content */}
+      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              About Us
+            </h2>
+          </div>
+
+          <article className="scroll-animate">
+            <div className="float-container grid lg:grid-cols-2 gap-16 items-center mb-16">
+              <figure className="float-img">
+                <div className="w-full h-80 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
+                  <div className="text-center">
+                    <Users className="w-24 h-24 text-primary mx-auto mb-4" />
+                    <p className="text-primary font-semibold">Pekamy Logo</p>
+                  </div>
+                </div>
+              </figure>
+              <div className="float-text space-y-6">
+                <h3 className="text-2xl font-bold text-foreground">
+                  At Pekamy Freshminds, we connect skilled interns, NYSC members, students, graduates, and freshers with real companies looking for support with forward thinking companies ready to grow
+                </h3>
+                <ul className="space-y-4">
+                  {keyBenefits.map((benefit, index) => (
+                    <li key={index} className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground flex-shrink-0">
+                        {benefit.icon}
+                      </div>
+                      <strong className="text-foreground">{benefit.title}</strong>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <Badge className="bg-blue-100 text-blue-800 mb-4">Pekamy Freshminds LTD</Badge>
-            <h2 className="text-5xl font-bold mb-6">
-              All-in-one <span className="modern-text">Growth Partner</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              At Pekamy Fresh Minds Ltd, we combine strategy and execution to give your business the visibility and support it needs.
-            </p>
-          </div>
+          </article>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 animate-stagger">
-            {digitalServices.map((service, index) => (
-              <Card key={index} className="group hover-lift bg-white/90 backdrop-blur-sm border border-border/50 hover:border-primary/30 overflow-hidden relative service-card">
-                <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 text-center relative z-10">
-                  <div className={`w-20 h-20 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mx-auto mb-6 text-white shadow-lg group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-                    {service.icon}
+          <article className="scroll-animate">
+            <div className="float-container grid lg:grid-cols-2 gap-16 items-center">
+              <figure className="float-img">
+                <div className="w-full h-80 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center">
+                  <div className="text-center">
+                    <Briefcase className="w-24 h-24 text-secondary mx-auto mb-4" />
+                    <p className="text-secondary font-semibold">We are here for you</p>
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                  
-                  <div className="mt-6 pt-4 border-t border-border/30">
-                    <div className="flex items-center justify-center space-x-2 text-sm text-primary font-medium">
-                      <span>Learn More</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                </div>
+              </figure>
+              <div className="float-text">
+                <h3 className="text-2xl font-bold text-foreground mb-6">
+                  PFM is a growing community built to unlock career opportunities for individuals at every stage of their journey. Whether you're just starting out, looking to gain experience, or seeking to showcase your skills, <strong>Pekamy Freshminds</strong> bridges the gap between talent and opportunity.
+                </h3>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* Image Scroll Section - Added from HTML */}
+      <section className="image-scroll-section py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+          <div className="image-card group">
+            <Link to="/blog" className="block">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center">
+                  <Sparkles className="w-16 h-16 text-blue-600" />
+                </div>
+                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+                  <div className="text-white font-semibold">Empowering Fresh Minds</div>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="image-card group">
+            <a href="#cert-section" className="block">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="w-full h-64 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
+                  <Shield className="w-16 h-16 text-green-600" />
+                </div>
+                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+                  <div className="text-white font-semibold">Officially Recognized by the Federal Government of Nigeria</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div className="image-card group">
+            <Link to="/pet" className="block">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="w-full h-64 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
+                  <Target className="w-16 h-16 text-purple-600" />
+                </div>
+                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+                  <div className="text-white font-semibold">The Future Begins Here</div>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works Section - Added from HTML */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
+        <div className="max-w-7xl mx-auto">
+          <article className="content-2 text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">How it Works</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              At Pekamy Freshminds, we bridge the gap between talents and opportunity through a structured, hands-on process.
+            </p>
+          </article>
+
+          <div className="space-y-12">
+            {howItWorks.map((step, index) => (
+              <div key={index} className="scroll-animate flex items-center" style={{ animationDelay: `${index * 0.2}s` }}>
+                <div className={`flex ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center w-full gap-8`}>
+                  <div className="flex-1">
+                    <Card className="modern-card bg-white border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                      <CardContent className="p-8">
+                        <div className="flex items-center mb-4">
+                          <div className="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground font-bold text-xl mr-4">
+                            {step.step}
+                          </div>
+                          <h3 className="text-2xl font-bold text-foreground">{step.title}</h3>
+                        </div>
+                        <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  <div className="hidden lg:block">
+                    <div className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground shadow-lg">
+                      {step.icon}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
-          
-          <div className="text-center mt-16 animate-slide-up">
-            <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 p-8 rounded-3xl border border-primary/20 backdrop-blur-sm max-w-4xl mx-auto">
-              <h3 className="text-3xl font-bold mb-4 modern-text">Ready to Transform Your Digital Marketing?</h3>
-              <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-                Partner with Pekamy Freshminds for comprehensive digital marketing solutions that deliver measurable results and sustainable growth for your business.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/contact">
-                  <Button size="lg" className="btn-primary-2025 px-8 py-4 text-lg hover-glow">
-                    Get Marketing Consultation
-                    <Megaphone className="ml-2 w-5 h-5" />
-                  </Button>
-                </Link>
-                <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-4 text-lg transition-all duration-300 hover:scale-105">
-                  View Portfolio
-                  <BarChart3 className="ml-2 w-5 h-5" />
-                </Button>
-              </div>
-            </div>
+
+          <div className="text-center mt-16 scroll-animate">
+            <p className="text-xl font-semibold text-muted-foreground italic">
+              <strong><em>"No matter your level, Pekamy helps you grow and get closer to real-world experience in tech, business and beyond"</em></strong>
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/10 fade-in-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 animate-slide-up">
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center text-white animate-glow-pulse">
-                <Shield className="w-8 h-8" />
-              </div>
+      {/* Vision & Mission Section - Added from HTML */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
+        <div className="max-w-7xl mx-auto">
+          <article className="scroll-animate">
+            <div className="float-container grid lg:grid-cols-2 gap-12">
+              <Card className="modern-card bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-6">
+                    <Target className="w-8 h-8 text-primary mr-4" />
+                    <h3 className="text-2xl font-bold text-foreground">Our Vision</h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To become the most trusted bridge between job ready youths and organizations, creating a future where no skilled person is unemployed, and no growing business is under-resourced.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="modern-card bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+                <CardContent className="p-8">
+                  <div className="flex items-center mb-6">
+                    <Briefcase className="w-8 h-8 text-secondary mr-4" />
+                    <h3 className="text-2xl font-bold text-foreground">Our Mission</h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    To Create real, accessible work opportunities that support personal growth, practical experience and organizational success.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
-            <h2 className="text-5xl font-bold mb-6">Why Choose Pekamy Freshminds?</h2>
+          </article>
+        </div>
+      </section>
+
+      {/* Features Section with Modern Cards */}
+      <section id="services" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              Our Services
+            </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We're the bridge between emerging talent and forward-thinking companies, focusing on empowering individuals by connecting them to real opportunities where their abilities can shine.
+              Comprehensive solutions for modern workforce challenges
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 animate-stagger">
+
+          <div className="modern-grid">
             {features.map((feature, index) => (
-              <Card key={index} className="group hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 text-center relative z-10">
-                  <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto mb-6 text-white shadow-lg group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
+              <Card key={index} className="modern-card scroll-animate h-full" style={{ animationDelay: `${index * 0.2}s` }}>
+                <CardContent className="p-8 h-full flex flex-col">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 text-primary-foreground">
                     {feature.icon}
                   </div>
-                  <h3 className="text-2xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h3 className="text-2xl font-bold mb-4 text-foreground">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed flex-grow">{feature.description}</p>
+                  <Button variant="ghost" className="mt-6 p-0 h-auto font-semibold text-primary hover:text-primary/80">
+                    Learn More <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -365,304 +531,264 @@ const Home = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="py-20 px-4 bg-white/90 backdrop-blur-sm fade-in-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">
-              How It <span className="modern-text">Works</span>
+      {/* Digital Services Slider */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              Digital Marketing
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              At Pekamy Freshminds, we bridge the gap between talent and opportunity through a structured, hands-on process designed for the modern workplace.
+              Complete digital marketing solutions for your business growth
             </p>
           </div>
-          
-          <div className="space-y-8 max-w-5xl mx-auto animate-stagger">
-            {[
-              { 
-                step: 1, 
-                title: "Submit Your Details", 
-                desc: "Talents send their full names, skillsets, job interests, location, and contact information through our streamlined application process.",
-                icon: <Users className="w-6 h-6" />
-              },
-              { 
-                step: 2, 
-                title: "Screening & Talent Webinars", 
-                desc: "We organize mandatory webinars to guide talents on expectations, how to stand out, and how the Pekamy Entry Track (PET) works.",
-                icon: <Target className="w-6 h-6" />
-              },
-              { 
-                step: 3, 
-                title: "PET Programs", 
-                desc: "A structured onboarding phase where top-tier candidates are fast-tracked (minimum 3 months), while others continue based on performance and learning pace.",
-                icon: <Zap className="w-6 h-6" />
-              },
-              { 
-                step: 4, 
-                title: "Screening & Evaluation", 
-                desc: "Candidates are assessed for skills, communication, and work-readiness through practical tasks and guided mentorship sessions.",
-                icon: <Shield className="w-6 h-6" />
-              },
-              { 
-                step: 5, 
-                title: "Opportunity Matching", 
-                desc: "After evaluation, successful talents are matched with internships, freelance projects, or full-time job placements that align with their skills.",
-                icon: <Award className="w-6 h-6" />
-              }
-            ].map((item, index) => (
-              <Card key={index} className="group hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="flex flex-col lg:flex-row lg:items-center gap-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                        {item.step}
-                      </div>
-                      <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                        {item.icon}
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">{item.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+
+          <div className="modern-slider relative">
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentServiceSlide * 100}%)` }}
+              >
+                {Array.from({ length: Math.ceil(digitalServices.length / 3) }).map((_, slideIndex) => (
+                  <div key={slideIndex} className="min-w-full">
+                    <div className="grid md:grid-cols-3 gap-8">
+                      {digitalServices.slice(slideIndex * 3, slideIndex * 3 + 3).map((service, index) => (
+                        <Card key={index} className="modern-card slider-item">
+                          <CardContent className="p-8">
+                            <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mb-6 text-primary-foreground">
+                              {service.icon}
+                            </div>
+                            <h3 className="text-xl font-bold mb-4 text-foreground">{service.title}</h3>
+                            <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                          </CardContent>
+                        </Card>
+                      ))}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                ))}
+              </div>
+            </div>
+
+            {/* Slider Navigation */}
+            <div className="flex justify-center mt-8 space-x-4">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setCurrentServiceSlide(prev => prev === 0 ? Math.ceil(digitalServices.length / 3) - 1 : prev - 1)}
+                className="glass-effect"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() => setCurrentServiceSlide(prev => (prev + 1) % Math.ceil(digitalServices.length / 3))}
+                className="glass-effect"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Government Certification Section - Added from HTML */}
+      <article id="cert-section" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 to-secondary/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              Officially Recognized by the Federal Government of Nigeria
+            </h2>
+          </div>
+
+          <div className="float-container grid lg:grid-cols-2 gap-16 items-center scroll-animate">
+            <figure className="float-img">
+              <div className="w-full h-80 bg-gradient-to-br from-green-200 to-blue-200 rounded-2xl shadow-2xl flex items-center justify-center">
+                <div className="text-center">
+                  <Shield className="w-24 h-24 text-green-600 mx-auto mb-4" />
+                  <p className="text-green-800 font-semibold">Our Certification</p>
+                </div>
+              </div>
+            </figure>
+            <div className="float-text space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground mb-2">Government Approved Platform</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We are proud to be a government approved platform, recognized for our commitment to excellence, transparency, and national development. Our operations are fully aligned with federal regulations and national standards.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      {/* Stats Section */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-primary/5">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              Our Impact
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center scroll-animate" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground shadow-lg">
+                  {stat.icon}
+                </div>
+                <div className="text-4xl sm:text-5xl font-bold text-gradient mb-2">{stat.number}</div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
+              </div>
             ))}
           </div>
-          
-          <div className="text-center mt-16 animate-slide-up">
-            <div className="bg-gradient-to-r from-primary/10 to-secondary/10 p-8 rounded-3xl border border-primary/20 backdrop-blur-sm">
-              <p className="text-2xl italic font-medium modern-text leading-relaxed">
-                "No matter your level, Pekamy helps you grow and get closer to real-world experience in tech, business and beyond"
-              </p>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary/5 to-background">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="scroll-animate mb-16">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              Success Stories
+            </h2>
+          </div>
+
+          <div className="relative overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+            >
+              {testimonials.map((testimonial, index) => (
+                <Card key={index} className="min-w-full modern-card">
+                  <CardContent className="p-12">
+                    <div className="flex justify-center mb-6">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className={`w-6 h-6 ${i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
+                      ))}
+                    </div>
+                    <blockquote className="text-xl sm:text-2xl text-foreground mb-8 leading-relaxed">
+                      "{testimonial.content}"
+                    </blockquote>
+                    <div>
+                      <div className="font-bold text-lg text-foreground">{testimonial.name}</div>
+                      <div className="text-muted-foreground">{testimonial.role}</div>
+                      <div className="text-primary font-medium">{testimonial.company}</div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Vision & Mission Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-secondary/5 to-primary/5 fade-in-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">Our <span className="modern-text">Purpose</span></h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Driven by a clear vision and unwavering mission to transform the future of work.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-12 animate-stagger">
-            <Card className="hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 p-8 group overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Target className="w-8 h-8" />
-                </div>
-                <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">Our Vision</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  To become the most trusted bridge between job-ready youth and organizations, creating a future where no skilled person is unemployed, and no growing business is under-resourced.
-                </p>
-              </div>
-            </Card>
-            
-            <Card className="hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 p-8 group overflow-hidden relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Briefcase className="w-8 h-8" />
-                </div>
-                <h3 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors duration-300">Our Mission</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  To create real, accessible work opportunities that support personal growth, practical experience, and organizational success in the digital age.
-                </p>
-              </div>
-            </Card>
+          <div className="flex justify-center mt-8 space-x-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTestimonial(index)}
+                className={`w-3 h-3 rounded-full transition-colors duration-200 ${
+                  index === currentTestimonial ? 'bg-primary' : 'bg-primary/30'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 px-4 bg-white/90 backdrop-blur-sm fade-in-section">
-        <div className="container mx-auto">
-          <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">What People Say</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Real stories from real people who transformed their careers with Pekamy Freshminds.
-            </p>
+      {/* FAQ Section - Added from HTML */}
+      <aside className="questionnaire py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5">
+        <div className="max-w-4xl mx-auto scroll-animate">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gradient mb-6">
+              Frequently Asked Questions
+            </h2>
           </div>
-          
-          <div className="max-w-4xl mx-auto">
-            <Card className="hover-lift bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20 p-8 relative overflow-hidden">
-              <div className="absolute top-4 right-4 flex space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              
-              <div className="text-center animate-scale-in" key={currentTestimonial}>
-                <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-6 shadow-lg">
-                  {testimonials[currentTestimonial].name.charAt(0)}
-                </div>
-                
-                <blockquote className="text-2xl italic text-foreground mb-6 leading-relaxed">
-                  "{testimonials[currentTestimonial].content}"
-                </blockquote>
-                
-                <div>
-                  <div className="font-bold text-lg text-primary">{testimonials[currentTestimonial].name}</div>
-                  <div className="text-muted-foreground">{testimonials[currentTestimonial].role}</div>
-                  <div className="text-sm text-muted-foreground">{testimonials[currentTestimonial].company}</div>
-                </div>
-              </div>
-              
-              <div className="flex justify-center mt-8 space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial 
-                        ? 'bg-primary scale-125' 
-                        : 'bg-primary/30 hover:bg-primary/50'
-                    }`}
-                    onClick={() => setCurrentTestimonial(index)}
-                  />
-                ))}
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
 
-      {/* Certification Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-green-50 to-blue-50 fade-in-section">
-        <div className="container mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div className="animate-slide-up">
-              <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-green-500 to-blue-500 rounded-xl flex items-center justify-center text-white">
-                  <Shield className="w-5 h-5" />
-                </div>
-                <Badge className="bg-green-100 text-green-800">Government Approved</Badge>
-              </div>
-              
-              <h2 className="text-5xl font-bold mb-6 leading-tight">
-                Officially Recognized by the
-                <span className="modern-text block">Federal Government of Nigeria</span>
-              </h2>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                We are proud to be a government-approved platform, recognized for our commitment to excellence, transparency, and national development. Our operations are fully aligned with federal regulations and national standards.
-              </p>
-              
-              <div className="flex items-center space-x-4">
-                <CheckCircle className="w-6 h-6 text-green-500" />
-                <span className="font-semibold">Certified & Trusted Platform</span>
-              </div>
-            </div>
-            
-            <div className="flex justify-center animate-slide-up" style={{animationDelay: '0.3s'}}>
-              <div className="relative">
-                <div className="w-80 h-64 bg-gradient-to-br from-green-100 to-blue-100 rounded-3xl flex items-center justify-center shadow-floating hover:shadow-glow transition-all duration-500 hover:scale-105 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-glass"></div>
-                  <img src="/images/verified.jpg.jpg" alt="Government Verification" className="w-64 h-48 object-contain relative z-10" />
-                </div>
-                <div className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-br from-green-500 to-blue-500 rounded-2xl flex items-center justify-center text-white animate-glow-pulse">
-                  <CheckCircle className="w-6 h-6" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/10 fade-in-section">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">Frequently Asked <span className="modern-text">Questions</span></h2>
-            <p className="text-xl text-muted-foreground">
-              Everything you need to know about our process and services.
-            </p>
-          </div>
-          
-          <Card className="hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 p-8 group overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="relative z-10">
-              <details className="group/details">
-                <summary className="cursor-pointer text-xl font-bold text-foreground flex justify-between items-center py-6 hover:text-primary transition-colors duration-300 list-none">
+          <Card className="modern-card bg-white/80 backdrop-blur-sm border-0 shadow-xl">
+            <CardContent className="p-8">
+              <details className="group">
+                <summary className="flex items-center justify-between cursor-pointer text-lg font-semibold text-foreground hover:text-primary transition-colors">
                   <span>How does Pekamy Freshminds uniquely contribute to solving the problem of skilled yet inexperienced individuals struggling to find real opportunities?</span>
-                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center text-primary group-open/details:rotate-45 transition-transform duration-300">
-                    <span className="text-2xl font-bold">+</span>
-                  </div>
+                  <ChevronRight className="w-5 h-5 group-open:rotate-90 transition-transform" />
                 </summary>
-                <div className="mt-6 pt-6 border-t border-border/50 animate-slide-up">
-                  <div className="bg-gradient-to-r from-primary/5 to-secondary/5 p-6 rounded-2xl border border-primary/20">
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      At Pekamy Freshminds, we believe that while it often takes a group to identify a problem, it takes a bold, committed mind to take action. We've taken that step by creating structured systems aimed at closing the gap between being skilled and being experienced. Our programs offer practical pathways for growth, and we invite you to join the mission. Together, let's become part of a movement that transforms potential into real-world impact.
-                    </p>
-                  </div>
+                <div className="mt-6 pl-4 border-l-2 border-primary/20">
+                  <p className="text-muted-foreground leading-relaxed italic">
+                    <em>At Pekamy Freshminds, we believe that while it often takes a group to identify a problem, it takes a bold, committed mind to take action. We've taken that step by creating structured systems aimed at closing the gap between being skilled and being experienced. Our programs offer practical pathways for growth, and we invite you to join the mission. Together, let's become part of a movement that transforms potential into real world impact.</em>
+                  </p>
                 </div>
               </details>
-            </div>
+            </CardContent>
           </Card>
         </div>
-      </section>
+      </aside>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary via-secondary to-primary text-white relative overflow-hidden fade-in-section">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="container mx-auto text-center relative z-10">
-          <div className="max-w-4xl mx-auto animate-slide-up">
-            <div className="w-20 h-20 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-8 animate-glow-pulse">
-              <Sparkles className="w-10 h-10" />
-            </div>
-            
-            <h2 className="text-5xl font-bold mb-6">Ready to Transform Your Future?</h2>
-            <p className="text-xl opacity-90 mb-12 max-w-3xl mx-auto">
-              Join hundreds of companies and thousands of talents who trust Pekamy Freshminds to unlock their potential and drive success.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link to="/contact">
-                <Button 
-                  size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 px-8 py-4 text-lg shadow-xl"
-                >
-                  Get Started Today
-                  <ArrowRight className="ml-2 w-6 h-6" />
-                </Button>
-              </Link>
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5">
+        <div className="max-w-4xl mx-auto text-center scroll-animate">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-8">
+            Ready to Transform Your Future?
+          </h2>
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed">
+            Join thousands of successful graduates who started their journey with Pekamy Fresh Minds
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <Button size="lg" className="btn-modern px-12 py-4 text-lg font-semibold rounded-xl" asChild>
               <Link to="/screening">
-                <Button 
-                  size="lg" 
-                  variant="outline" 
-                  className="border-2 border-white text-white hover:bg-white hover:text-primary hover:scale-105 transition-all duration-300 px-8 py-4 text-lg"
-                >
-                  Learn About PET
-                  <Target className="ml-2 w-6 h-6" />
-                </Button>
+                Get Started Today
+                <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
-            </div>
+            </Button>
+            <Button variant="outline" size="lg" className="glass-effect border-2 px-12 py-4 text-lg font-semibold rounded-xl" asChild>
+              <Link to="/contact">
+                Learn More
+              </Link>
+            </Button>
           </div>
         </div>
-        
-        {/* Animated background elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/5 rounded-full animate-float" style={{animationDelay: '4s'}}></div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 bg-secondary text-white">
-        <div className="container mx-auto text-center">
-          <div className="mb-6">
-            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-8 h-8" />
+      {/* Modern Footer with Reveal Animation */}
+      <footer className="footer-reveal bg-gradient-to-br from-secondary to-primary text-primary-foreground py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
+            <div className="md:col-span-2">
+              <h3 className="text-3xl font-bold text-gradient mb-4">Pekamy Fresh Minds</h3>
+              <p className="text-primary-foreground/80 leading-relaxed max-w-md mb-4">
+                Empowering the next generation of professionals through innovative training, 
+                screening, and placement programs.
+              </p>
+              <p className="text-sm text-primary-foreground/60">Your Next Chapter Starts Here</p>
             </div>
-            <p className="text-lg opacity-90">Pekamy Freshminds</p>
+            <div>
+              <h4 className="text-xl font-bold mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><a href="#home" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Home</a></li>
+                <li><a href="#about" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">About</a></li>
+                <li><Link to="/pet" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">PET Program</Link></li>
+                <li><Link to="/blog" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Blog</Link></li>
+                <li><Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold mb-4">Connect</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">LinkedIn</a></li>
+                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Instagram</a></li>
+                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Twitter</a></li>
+                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Facebook</a></li>
+              </ul>
+            </div>
           </div>
-          <p className="opacity-75">&copy; 2025 Pekamy Freshminds. All rights reserved.</p>
+          <div className="border-t border-primary-foreground/20 pt-8 text-center">
+            <p className="text-primary-foreground/60">
+              © 2025 Pekamy Fresh Minds. All rights reserved.
+            </p>
+          </div>
         </div>
       </footer>
 
@@ -670,77 +796,11 @@ const Home = () => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="floating-action group"
+          className="fixed bottom-8 right-8 z-50 btn-modern p-3 rounded-full shadow-lg"
         >
-          <ArrowUp className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
+          <ArrowUp className="w-5 h-5" />
         </button>
       )}
-
-      <style>{`
-        .animate-stagger > * {
-          opacity: 0;
-          animation: slide-up 0.8s ease-out forwards;
-        }
-
-        .animate-stagger > *:nth-child(1) { animation-delay: 0.1s; }
-        .animate-stagger > *:nth-child(2) { animation-delay: 0.3s; }
-        .animate-stagger > *:nth-child(3) { animation-delay: 0.5s; }
-        .animate-stagger > *:nth-child(4) { animation-delay: 0.7s; }
-        .animate-stagger > *:nth-child(5) { animation-delay: 0.9s; }
-        .animate-stagger > *:nth-child(6) { animation-delay: 1.1s; }
-
-        .testimonial-transition {
-          animation: scale-in 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .service-card {
-          transition: all 0.3s ease;
-        }
-
-        .service-card:hover {
-          transform: translateY(-8px) scale(1.02);
-        }
-
-        .modern-text {
-          background: linear-gradient(135deg, #9a4eae, #2f0033);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .floating-action {
-          position: fixed;
-          bottom: 2rem;
-          right: 2rem;
-          z-index: 50;
-          background: linear-gradient(135deg, #9a4eae, #2f0033);
-          color: white;
-          border: none;
-          border-radius: 50%;
-          width: 3.5rem;
-          height: 3.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 10px 25px rgba(154, 78, 174, 0.3);
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .floating-action:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 15px 35px rgba(154, 78, 174, 0.4);
-        }
-
-        @keyframes hero-float {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(2deg); }
-        }
-
-        .hero-element {
-          animation: hero-float 4s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 };

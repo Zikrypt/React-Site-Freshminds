@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import Footer from "@/components/Footer";
 import { 
   Rocket, 
   Target, 
@@ -24,10 +25,13 @@ import {
   Globe,
   MessageSquare,
   BarChart3,
-  Briefcase
+  Briefcase,
+  Home,
+  Mail
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const PET = () => {
+const Screening = () => {
   const [activeTrack, setActiveTrack] = useState('fast-track');
   const [visiblePhase, setVisiblePhase] = useState(0);
 
@@ -36,9 +40,9 @@ const PET = () => {
       title: 'Fast-Track Program',
       duration: '3 Months',
       description: 'For candidates with strong foundational skills who are ready for immediate professional challenges and rapid career acceleration.',
-      color: 'from-green-500 to-emerald-600',
+      color: 'from-[#9a4eae] to-[#7a3e8e]',
       icon: <Rocket className="w-6 h-6" />,
-      gradient: 'from-green-500/10 to-emerald-600/10',
+      gradient: 'from-[#9a4eae]/20 to-[#7a3e8e]/20',
       benefits: [
         'Accelerated skill development with AI-powered learning',
         'Priority placement opportunities with top companies',
@@ -52,9 +56,9 @@ const PET = () => {
       title: 'Standard Program',
       duration: '6 Months',
       description: 'Comprehensive development program for candidates who need structured time to build their skills and professional confidence.',
-      color: 'from-blue-500 to-indigo-600',
+      color: 'from-[#8a46a0] to-[#6a3686]',
       icon: <Target className="w-6 h-6" />,
-      gradient: 'from-blue-500/10 to-indigo-600/10',
+      gradient: 'from-[#8a46a0]/20 to-[#6a3686]/20',
       benefits: [
         'Step-by-step skill building with personalized roadmaps',
         'Extended mentorship period with weekly check-ins',
@@ -68,9 +72,9 @@ const PET = () => {
       title: 'Extended Program',
       duration: '9+ Months',
       description: 'In-depth program for candidates starting from beginner level, with continuous support and flexible learning paths.',
-      color: 'from-purple-500 to-pink-600',
+      color: 'from-[#7a3e92] to-[#5a2e72]',
       icon: <BookOpen className="w-6 h-6" />,
-      gradient: 'from-purple-500/10 to-pink-600/10',
+      gradient: 'from-[#7a3e92]/20 to-[#5a2e72]/20',
       benefits: [
         'Foundational skills training from ground up',
         'Continuous progress monitoring and adaptation',
@@ -82,62 +86,63 @@ const PET = () => {
     }
   };
 
+  // Updated phases with HTML content
   const phases = [
     {
       phase: 1,
-      title: 'Application & Assessment',
-      description: 'Submit your details and complete our comprehensive skills assessment. Every participant begins by submitting an updated CV through our designated intake form. This step is crucial because it gives us an initial understanding of your current skill level, interests, and professional presentation.',
+      title: 'CV Submission',
+      description: 'Every participant begins by submitting an updated CV through our designated intake form. This step is crucial because it gives us an initial understanding of your current skill level, interests, and professional presentation. We advise participants to take this step seriously, as it serves as your first impression both to our team and potential future placement partners.',
       duration: '1 Week',
       activities: [
-        'Online application form with skills matrix',
-        'AI-powered skills assessment test',
-        'Video interview with our talent team',
-        'Portfolio review and feedback session'
+        'Submit updated CV through designated intake form',
+        'Complete skills and interests assessment',
+        'Professional presentation evaluation',
+        'Initial profile creation and review'
       ],
       icon: <User className="w-6 h-6" />,
-      color: 'from-blue-500 to-purple-600'
+      color: 'from-[#9a4eae] to-[#7a3e8e]'
     },
     {
       phase: 2,
-      title: 'Orientation & Screening',
-      description: 'Attend mandatory webinars and set personalized learning goals. Our team conducts careful review focusing on clarity, potential, and alignment with opportunities we provide. Each CV is reviewed for relevant skills, strengths, and professional readiness.',
+      title: 'Screening & Review',
+      description: 'Once CVs are submitted, our team conducts a careful review. We\'re not just looking for fancy degrees or long work histories — we focus on clarity, potential, and alignment with the kinds of opportunities we provide. Each CV is reviewed for relevant skills, strengths, and professional readiness. This process helps us make informed decisions about the kind of support you\'ll need.',
       duration: '1 Week',
       activities: [
-        'Interactive welcome webinar session',
-        'Comprehensive PET program overview',
-        'Personal mentor assignment and introduction',
-        'Customized personal development plan creation'
+        'Comprehensive CV review process',
+        'Skills and potential assessment',
+        'Alignment evaluation with available opportunities',
+        'Professional readiness determination'
       ],
       icon: <Target className="w-6 h-6" />,
-      color: 'from-purple-500 to-pink-600'
+      color: 'from-[#8a46a0] to-[#6a3686]'
     },
     {
       phase: 3,
-      title: 'Skill Development & Clarity Call',
-      description: 'Intensive training phase with practical projects and assessments. Participants who pass screening are invited to a Clarity Call - a detailed conversation where we understand your goals, preferred niches, strengths, and career challenges.',
-      duration: 'Variable',
+      title: 'Clarity Call & CV Improvement',
+      description: 'Participants who pass the screening stage are invited to a Clarity Call. This is more than just an interview — it\'s a 1-on-1 or small group conversation where we get to know you better. We\'ll ask about your goals, preferred niches, strengths, and career struggles. You\'ll also get detailed feedback on your CV with suggestions for improvement. This ensures that you\'re not just part of the program — you\'re prepared for it.',
+      duration: '1-2 Weeks',
       activities: [
-        'Technical skill training modules',
-        'Interactive soft skills workshops',
-        'Real-world project assignments',
-        'Collaborative peer learning sessions'
+        '1-on-1 or small group clarity sessions',
+        'Goals and career aspirations discussion',
+        'Strengths and challenges assessment',
+        'Detailed CV feedback and improvement suggestions'
       ],
-      icon: <Brain className="w-6 h-6" />,
-      color: 'from-pink-500 to-red-600'
+      icon: <MessageSquare className="w-6 h-6" />,
+      color: 'from-[#9a4eae] to-[#6a3686]'
     },
     {
       phase: 4,
-      title: 'Evaluation & Certification',
-      description: 'Final assessment and certification based on performance. Based on information from your CV and clarity session, you will be assigned to a tier: Beginner, Intermediate, or Advanced for personalized support.',
-      duration: '2 Weeks',
+      title: 'Tier Classification',
+      description: 'Based on the information collected from your CV and clarity session, you\'ll be assigned to a tier: Beginner, Intermediate, or Advanced. These tiers help us provide personalized support, match you to the right tasks, and track your growth as you move through the program.',
+      duration: '1 Week',
       activities: [
-        'Comprehensive final project presentation',
-        'Multi-dimensional skills evaluation',
-        'Professional certificate award ceremony',
-        'Detailed performance feedback and roadmap'
+        'Comprehensive skills evaluation',
+        'Tier assignment (Beginner/Intermediate/Advanced)',
+        'Personalized development plan creation',
+        'Task matching based on tier level'
       ],
       icon: <Award className="w-6 h-6" />,
-      color: 'from-red-500 to-orange-600'
+      color: 'from-[#8a46a0] to-[#5a2e72]'
     },
     {
       phase: 5,
@@ -151,7 +156,7 @@ const PET = () => {
         'Continuous post-placement support and growth tracking'
       ],
       icon: <Trophy className="w-6 h-6" />,
-      color: 'from-orange-500 to-yellow-600'
+      color: 'from-[#7a3e92] to-[#4a2662]'
     }
   ];
 
@@ -190,10 +195,10 @@ const PET = () => {
 
   const requirements = [
     { text: 'Strong motivation and commitment to continuous learning', icon: <Zap className="w-5 h-5 text-yellow-500" /> },
-    { text: 'Intermediate English communication skills', icon: <MessageSquare className="w-5 h-5 text-blue-500" /> },
+    { text: 'Intermediate English communication skills', icon: <MessageSquare className="w-5 h-5 text-blue-400" /> },
     { text: 'Access to a computer and stable internet connection', icon: <Globe className="w-5 h-5 text-green-500" /> },
-    { text: 'Willingness to participate in collaborative group activities', icon: <Users className="w-5 h-5 text-purple-500" /> },
-    { text: 'Dedication to complete the full program duration', icon: <Shield className="w-5 h-5 text-red-500" /> }
+    { text: 'Willingness to participate in collaborative group activities', icon: <Users className="w-5 h-5 text-[#9a4eae]" /> },
+    { text: 'Dedication to complete the full program duration', icon: <Shield className="w-5 h-5 text-red-400" /> }
   ];
 
   const skills = [
@@ -201,25 +206,25 @@ const PET = () => {
       category: 'Technical Skills', 
       items: ['Web Development', 'Data Analysis', 'Digital Marketing', 'Graphic Design', 'Mobile App Development'],
       icon: <Brain className="w-6 h-6" />,
-      color: 'from-blue-500 to-cyan-500'
+      color: 'from-[#9a4eae] to-[#7a3e8e]'
     },
     { 
       category: 'Business Skills', 
       items: ['Project Management', 'Business Analysis', 'Customer Service', 'Sales', 'Operations'],
       icon: <Briefcase className="w-6 h-6" />,
-      color: 'from-green-500 to-teal-500'
+      color: 'from-[#8a46a0] to-[#6a3686]'
     },
     { 
       category: 'Creative Skills', 
       items: ['Content Writing', 'Video Production', 'UI/UX Design', 'Social Media Management', 'Brand Development'],
       icon: <Sparkles className="w-6 h-6" />,
-      color: 'from-purple-500 to-pink-500'
+      color: 'from-[#9a4eae] to-[#6a3686]'
     },
     { 
       category: 'Soft Skills', 
       items: ['Communication', 'Leadership', 'Problem Solving', 'Time Management', 'Teamwork'],
       icon: <Users className="w-6 h-6" />,
-      color: 'from-orange-500 to-red-500'
+      color: 'from-[#7a3e92] to-[#5a2e72]'
     }
   ];
 
@@ -252,56 +257,134 @@ const PET = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background page-transition">
-      {/* Header with proper spacing */}
-      <section className="pt-28 pb-16 px-4 bg-gradient-to-r from-primary via-secondary to-primary text-white relative overflow-hidden">
+    <div className="min-h-screen bg-background page-enter">
+      {/* Header - Updated with HTML content */}
+      <header className="main-header fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b shadow-sm">
+        <div className="header-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="logo-section">
+              <h1 className="blog-title text-2xl font-bold bg-gradient-to-r from-[#9a4eae] to-[#2f0033] bg-clip-text text-transparent">
+                PET Screening Process
+              </h1>
+              <p className="text-xs text-gray-600">Onboarding & Placement Structure</p>
+            </div>
+
+            <nav className="main-nav hidden md:block">
+              <ul className="nav-list flex items-baseline space-x-4">
+                <li>
+                  <Link to="/" className="text-gray-700 hover:text-[#9a4eae] px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Home className="w-4 h-4 mr-1" /> PFM
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-gray-700 hover:text-[#9a4eae] px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Mail className="w-4 h-4 mr-1" /> Contact Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/blog" className="text-gray-700 hover:text-[#9a4eae] px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <BookOpen className="w-4 h-4 mr-1" /> Our Blog
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      {/* Header with proper spacing - Enhanced with HTML content */}
+      <section className="pt-28 pb-16 px-4 bg-gradient-to-r from-[#9a4eae] via-[#2f0033] to-[#9a4eae] text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="container mx-auto text-center relative z-10 fade-in-section">
-          <div className="flex justify-center mb-6">
-            <div className="w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center backdrop-blur-sm animate-float shadow-glow">
-              <Rocket className="w-12 h-12" />
+          <div className="hero-content">
+            <div className="flex justify-center mb-6">
+              <div className="w-24 h-24 bg-white/30 rounded-3xl flex items-center justify-center backdrop-blur-sm animate-float shadow-lg">
+                <Rocket className="w-12 h-12" />
+              </div>
             </div>
-          </div>
-          
-          <Badge className="bg-white/20 text-white mb-4 px-4 py-2 text-sm font-medium backdrop-blur-sm">
-            Government Approved Program
-          </Badge>
-          
-          <h1 className="text-6xl font-bold mb-6">Pekamy Entry Track</h1>
-          <div className="text-4xl font-bold mb-8 text-yellow-300">PET</div>
-          
-          <p className="text-xl opacity-90 max-w-4xl mx-auto mb-12 leading-relaxed">
-            The <strong>Pekamy Entry Track (PET)</strong> is our flagship onboarding framework designed to guide new talents — especially students, fresh graduates, and aspiring professionals — through a structured, mentorship-driven development journey into the modern workforce.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 px-8 py-4 text-lg">
-              Apply Now
-              <ArrowRight className="ml-2 w-6 h-6" />
-            </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-primary hover:scale-105 transition-all duration-300 px-8 py-4 text-lg">
-              <Play className="mr-2 w-6 h-6" />
-              Watch Demo
-            </Button>
+            
+            <Badge className="bg-white/30 text-white mb-4 px-4 py-2 text-sm font-medium backdrop-blur-sm">
+              Government Approved Program
+            </Badge>
+            
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">Pekamy Entry Track</h1>
+            <div className="text-3xl md:text-4xl font-bold mb-8 text-purple-200">PET</div>
+            
+            {/* Hero content from HTML */}
+            <h2 className="hero-title text-3xl md:text-4xl font-bold mb-8">Discover, Learn, and Grow with Entry Track</h2>
+            
+            <div className="hero-stats mb-8">
+              <div className="stat-item">
+                <span className="stat-number text-xl md:text-2xl font-bold text-purple-200 block mb-2">
+                  "Careful selection, lasting Impact"
+                </span>
+              </div>
+            </div>
+            
+            <p className="text-lg md:text-xl opacity-95 max-w-4xl mx-auto mb-12 leading-relaxed">
+              The <strong>Pekamy Entry Track (PET)</strong> is our flagship onboarding framework designed to guide new talents — especially students, fresh graduates, and aspiring professionals — through a structured, mentorship-driven development journey into the modern workforce.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button size="lg" className="bg-white text-[#9a4eae] hover:bg-white/90 hover:scale-105 transition-all duration-300 px-8 py-4 text-lg font-semibold">
+                Apply Now
+                <ArrowRight className="ml-2 w-6 h-6" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-[#9a4eae] hover:scale-105 transition-all duration-300 px-8 py-4 text-lg font-semibold">
+                <Play className="mr-2 w-6 h-6" />
+                Watch Demo
+              </Button>
+            </div>
           </div>
         </div>
         
         {/* Animated background elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full animate-morph"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-white/10 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-white/20 rounded-full animate-morph"></div>
+        <div className="absolute bottom-20 right-10 w-24 h-24 bg-white/20 rounded-full animate-float" style={{animationDelay: '2s'}}></div>
       </section>
 
+      {/* Article Section - Added from HTML */}
+      <main className="blog-container py-20 px-4 bg-white fade-in-section">
+        <div className="container mx-auto max-w-4xl">
+          <article className="entry-track-article">
+            <div className="text-center mb-16 animate-slide-up">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+                The Pekamy Entry Track (PET): A Step-by-Step Breakdown
+              </h2>
+            </div>
+            
+            <Card className="hover-lift bg-white border border-gray-200 hover:border-[#9a4eae]/30 group overflow-hidden relative shadow-md">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-50/50 to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <CardContent className="p-6 md:p-8 relative z-10">
+                <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  The <strong>Pekamy Entry Track (PET)</strong> is our flagship onboarding framework designed to guide new talents especially students, fresh graduates, and aspiring professionals through a structured, mentorship-driven development journey.
+                </p>
+
+                <p className="text-lg text-gray-700 leading-relaxed mb-6">
+                  In a country where many young people are highly skilled but lack direction, PET fills that gap by turning potential into performance. Through real-world projects, personalized feedback, and niche-specific guidance, participants can build the competence and confidence they need to thrive in today's competitive environment.
+                </p>
+
+                <h3 className="text-2xl font-bold text-gray-900 mb-8 group-hover:text-[#9a4eae] transition-colors duration-300">
+                  Here's what the PET journey looks like from start to finish:
+                </h3>
+              </CardContent>
+            </Card>
+          </article>
+        </div>
+      </main>
+
       {/* Track Selection */}
-      <section className="py-20 px-4 bg-white/90 backdrop-blur-sm fade-in-section">
+      <section className="py-20 px-4 bg-gray-50 fade-in-section">
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-slide-up">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center text-white animate-glow-pulse">
+              <div className="w-16 h-16 bg-gradient-to-r from-[#9a4eae] to-[#2f0033] rounded-2xl flex items-center justify-center text-white animate-pulse">
                 <BarChart3 className="w-8 h-8" />
               </div>
             </div>
-            <h2 className="text-5xl font-bold mb-6">Choose Your <span className="modern-text">Track</span></h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Choose Your <span className="text-[#9a4eae]">Track</span></h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
               We offer three different tracks based on your current skill level and career goals. Each track is designed to maximize your potential and accelerate your journey.
             </p>
           </div>
@@ -310,16 +393,16 @@ const PET = () => {
             {Object.entries(tracks).map(([key, track]) => (
               <Card 
                 key={key}
-                className={`cursor-pointer transition-all duration-500 hover-lift group relative overflow-hidden ${
+                className={`cursor-pointer transition-all duration-500 hover:shadow-xl group relative overflow-hidden ${
                   activeTrack === key 
-                    ? 'ring-2 ring-primary shadow-glow border-primary/50 scale-105' 
-                    : 'hover:border-primary/30 hover:shadow-xl'
+                    ? 'ring-2 ring-[#9a4eae] shadow-lg border-[#9a4eae] scale-105' 
+                    : 'hover:border-[#9a4eae]/30 hover:shadow-lg'
                 }`}
                 onClick={() => setActiveTrack(key)}
               >
                 {track.badge && (
                   <div className="absolute top-4 right-4 z-10">
-                    <Badge className="bg-gradient-primary text-white shadow-lg">
+                    <Badge className="bg-gradient-to-r from-[#9a4eae] to-[#2f0033] text-white shadow-lg">
                       {track.badge}
                     </Badge>
                   </div>
@@ -327,34 +410,34 @@ const PET = () => {
                 
                 <div className={`absolute inset-0 bg-gradient-to-br ${track.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                 
-                <CardContent className="p-8 text-center relative z-10">
+                <CardContent className="p-6 md:p-8 text-center relative z-10 bg-white">
                   <div className={`w-20 h-20 bg-gradient-to-r ${track.color} rounded-2xl flex items-center justify-center mx-auto mb-6 text-white shadow-lg group-hover:shadow-xl group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
                     {track.icon}
                   </div>
                   
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-[#9a4eae] transition-colors duration-300">
                     {track.title}
                   </h3>
                   
-                  <div className="text-3xl font-bold text-primary mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="text-3xl font-bold text-[#9a4eae] mb-4 group-hover:scale-110 transition-transform duration-300">
                     {track.duration}
                   </div>
                   
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                  <p className="text-gray-700 mb-6 leading-relaxed">
                     {track.description}
                   </p>
                   
                   <div className="space-y-3">
                     {track.benefits.map((benefit, index) => (
-                      <div key={index} className="flex items-start space-x-3 text-sm p-2 rounded-lg hover:bg-primary/5 transition-colors duration-300">
+                      <div key={index} className="flex items-start space-x-3 text-sm p-2 rounded-lg hover:bg-purple-50 transition-colors duration-300">
                         <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-left">{benefit}</span>
+                        <span className="text-left text-gray-700">{benefit}</span>
                       </div>
                     ))}
                   </div>
                   
                   {activeTrack === key && (
-                    <Button className="w-full mt-6 btn-primary-2025 hover-glow animate-scale-in">
+                    <Button className="w-full mt-6 bg-[#9a4eae] hover:bg-[#8a46a0] text-white hover:shadow-lg transition-all duration-300">
                       Select This Track
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -366,14 +449,14 @@ const PET = () => {
         </div>
       </section>
 
-      {/* Program Phases */}
-      <section className="py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/10 fade-in-section">
+      {/* Program Phases - Enhanced with HTML content */}
+      <section className="py-20 px-4 bg-gradient-to-br from-purple-50/50 to-pink-50/50 fade-in-section">
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">
-              The <span className="modern-text">PET Journey</span>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              The <span className="text-[#9a4eae]">PET Journey</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
               Our structured 5-phase approach ensures comprehensive development and successful placement. Here's what the complete PET journey looks like from application to career success.
             </p>
           </div>
@@ -382,26 +465,26 @@ const PET = () => {
             {phases.map((phase, index) => (
               <Card 
                 key={index} 
-                className={`hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 group overflow-hidden relative transition-all duration-500 ${
-                  visiblePhase === index ? 'ring-2 ring-primary/30 shadow-glow' : ''
+                className={`hover:shadow-lg bg-white border border-gray-200 hover:border-[#9a4eae]/30 group overflow-hidden relative transition-all duration-500 ${
+                  visiblePhase === index ? 'ring-2 ring-[#9a4eae]/30 shadow-md' : ''
                 }`}
               >
-                <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-50/50 to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-                <CardContent className="p-8 relative z-10">
+                <CardContent className="p-6 md:p-8 relative z-10">
                   <div className="flex flex-col lg:flex-row lg:items-center gap-8">
                     <div className="flex items-center space-x-6">
-                      <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
+                      <div className="w-20 h-20 bg-gradient-to-r from-[#9a4eae] to-[#2f0033] rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
                         {phase.phase}
                       </div>
                       <div className={`w-16 h-16 bg-gradient-to-r ${phase.color} rounded-2xl flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                         {phase.icon}
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold group-hover:text-primary transition-colors duration-300">
+                        <h3 className="text-2xl font-bold text-gray-900 group-hover:text-[#9a4eae] transition-colors duration-300">
                           {phase.title}
                         </h3>
-                        <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
                           <Clock className="w-4 h-4" />
                           <span className="font-medium">{phase.duration}</span>
                         </div>
@@ -409,15 +492,15 @@ const PET = () => {
                     </div>
                     
                     <div className="flex-1">
-                      <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
+                      <p className="text-gray-700 mb-6 leading-relaxed text-lg">
                         {phase.description}
                       </p>
                       
                       <div className="grid md:grid-cols-2 gap-3">
                         {phase.activities.map((activity, actIndex) => (
-                          <div key={actIndex} className="flex items-center space-x-3 p-3 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors duration-300">
-                            <div className="w-2 h-2 bg-primary rounded-full"></div>
-                            <span className="text-sm font-medium">{activity}</span>
+                          <div key={actIndex} className="flex items-center space-x-3 p-3 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors duration-300">
+                            <div className="w-2 h-2 bg-[#9a4eae] rounded-full"></div>
+                            <span className="text-sm font-medium text-gray-700">{activity}</span>
                           </div>
                         ))}
                       </div>
@@ -431,34 +514,34 @@ const PET = () => {
       </section>
 
       {/* Skills Development */}
-      <section className="py-20 px-4 bg-white/90 backdrop-blur-sm fade-in-section">
+      <section className="py-20 px-4 bg-white fade-in-section">
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">Skills We <span className="modern-text">Develop</span></h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Skills We <span className="text-[#9a4eae]">Develop</span></h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
               Comprehensive skill development across technical, business, creative, and soft skills tailored for the modern workplace.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 animate-stagger">
             {skills.map((skillCategory, index) => (
-              <Card key={index} className="hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 group overflow-hidden relative">
-                <div className={`absolute inset-0 bg-gradient-to-br ${skillCategory.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+              <Card key={index} className="hover:shadow-lg bg-white border border-gray-200 hover:border-[#9a4eae]/30 group overflow-hidden relative">
+                <div className={`absolute inset-0 bg-gradient-to-br ${skillCategory.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
                 
                 <CardContent className="p-6 relative z-10">
                   <div className={`w-14 h-14 bg-gradient-to-r ${skillCategory.color} rounded-2xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300`}>
                     {skillCategory.icon}
                   </div>
                   
-                  <h3 className="text-xl font-bold mb-4 text-center group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold mb-4 text-center text-gray-900 group-hover:text-[#9a4eae] transition-colors duration-300">
                     {skillCategory.category}
                   </h3>
                   
                   <ul className="space-y-3">
                     {skillCategory.items.map((skill, skillIndex) => (
-                      <li key={skillIndex} className="flex items-center space-x-3 p-2 rounded-lg hover:bg-primary/5 transition-colors duration-300">
+                      <li key={skillIndex} className="flex items-center space-x-3 p-2 rounded-lg hover:bg-purple-50 transition-colors duration-300">
                         <Star className="w-4 h-4 text-yellow-500 flex-shrink-0" />
-                        <span className="text-sm font-medium">{skill}</span>
+                        <span className="text-sm font-medium text-gray-700">{skill}</span>
                       </li>
                     ))}
                   </ul>
@@ -470,47 +553,47 @@ const PET = () => {
       </section>
 
       {/* Success Stories */}
-      <section className="py-20 px-4 bg-gradient-to-br from-secondary/5 to-primary/5 fade-in-section">
+      <section className="py-20 px-4 bg-gradient-to-br from-purple-50/50 to-pink-50/50 fade-in-section">
         <div className="container mx-auto">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">Success <span className="modern-text">Stories</span></h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Success <span className="text-[#9a4eae]">Stories</span></h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
               Real stories from PET graduates who transformed their careers and achieved remarkable success in their chosen fields.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 animate-stagger">
             {successStories.map((story, index) => (
-              <Card key={index} className="hover-lift bg-white/80 backdrop-blur-sm border border-border/50 hover:border-primary/30 group overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <Card key={index} className="hover:shadow-lg bg-white border border-gray-200 hover:border-[#9a4eae]/30 group overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-50/50 to-pink-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
-                <CardContent className="p-8 text-center relative z-10">
+                <CardContent className="p-6 md:p-8 text-center relative z-10">
                   <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
                     {story.image}
                   </div>
                   
-                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-[#9a4eae] transition-colors duration-300">
                     {story.name}
                   </h3>
                   
-                  <p className="text-primary font-semibold mb-1">{story.role}</p>
-                  <p className="text-muted-foreground text-sm mb-3">{story.company}</p>
+                  <p className="text-[#9a4eae] font-semibold mb-1">{story.role}</p>
+                  <p className="text-gray-600 text-sm mb-3">{story.company}</p>
                   
                   <div className="flex justify-center space-x-2 mb-4">
-                    <Badge className="bg-primary/10 text-primary text-xs">
+                    <Badge className="bg-purple-100 text-[#9a4eae] text-xs">
                       {story.track} Graduate
                     </Badge>
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs text-gray-600">
                       {story.growth}
                     </Badge>
                   </div>
                   
-                  <div className="bg-primary/5 p-4 rounded-xl mb-4">
-                    <p className="text-sm font-semibold text-primary mb-1">Current Salary</p>
-                    <p className="text-lg font-bold">{story.salary}</p>
+                  <div className="bg-purple-50 p-4 rounded-xl mb-4">
+                    <p className="text-sm font-semibold text-[#9a4eae] mb-1">Current Salary</p>
+                    <p className="text-lg font-bold text-gray-900">{story.salary}</p>
                   </div>
                   
-                  <p className="text-muted-foreground italic text-sm leading-relaxed">
+                  <p className="text-gray-700 italic text-sm leading-relaxed">
                     "{story.story}"
                   </p>
                 </CardContent>
@@ -521,28 +604,28 @@ const PET = () => {
       </section>
 
       {/* Requirements */}
-      <section className="py-20 px-4 bg-white/90 backdrop-blur-sm fade-in-section">
+      <section className="py-20 px-4 bg-white fade-in-section">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16 animate-slide-up">
-            <h2 className="text-5xl font-bold mb-6">Program <span className="modern-text">Requirements</span></h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Program <span className="text-[#9a4eae]">Requirements</span></h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto">
               What you need to succeed in the PET program and unlock your potential.
             </p>
           </div>
 
-          <Card className="hover-lift bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20 group overflow-hidden relative">
-            <div className="absolute inset-0 bg-gradient-glass opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <Card className="hover:shadow-lg bg-gradient-to-br from-purple-50/50 to-pink-50/50 border border-[#9a4eae]/20 group overflow-hidden relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-100/50 to-pink-100/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
-            <CardContent className="p-12 relative z-10">
+            <CardContent className="p-6 md:p-12 relative z-10">
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   {requirements.slice(0, 3).map((requirement, index) => (
-                    <div key={index} className="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/50 transition-colors duration-300 group/item">
+                    <div key={index} className="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/70 transition-colors duration-300 group/item">
                       <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover/item:shadow-xl group-hover/item:scale-110 transition-all duration-300">
                         {requirement.icon}
                       </div>
                       <div className="flex-1">
-                        <p className="font-medium text-foreground leading-relaxed group-hover/item:text-primary transition-colors duration-300">
+                        <p className="font-medium text-gray-900 leading-relaxed group-hover/item:text-[#9a4eae] transition-colors duration-300">
                           {requirement.text}
                         </p>
                       </div>
@@ -552,12 +635,12 @@ const PET = () => {
                 
                 <div className="space-y-6">
                   {requirements.slice(3).map((requirement, index) => (
-                    <div key={index} className="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/50 transition-colors duration-300 group/item">
+                    <div key={index} className="flex items-start space-x-4 p-4 rounded-xl hover:bg-white/70 transition-colors duration-300 group/item">
                       <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg group-hover/item:shadow-xl group-hover/item:scale-110 transition-all duration-300">
                         {requirement.icon}
                       </div>
                       <div className="flex-1">
-                        <p className="font-medium text-foreground leading-relaxed group-hover/item:text-primary transition-colors duration-300">
+                        <p className="font-medium text-gray-900 leading-relaxed group-hover/item:text-[#9a4eae] transition-colors duration-300">
                           {requirement.text}
                         </p>
                       </div>
@@ -571,25 +654,25 @@ const PET = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary via-secondary to-primary text-white relative overflow-hidden fade-in-section">
+      <section className="py-20 px-4 bg-gradient-to-r from-[#9a4eae] via-[#2f0033] to-[#9a4eae] text-white relative overflow-hidden fade-in-section">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="container mx-auto text-center relative z-10">
           <div className="max-w-4xl mx-auto animate-slide-up">
-            <div className="w-24 h-24 bg-white/20 rounded-3xl flex items-center justify-center mx-auto mb-8 animate-glow-pulse backdrop-blur-sm">
+            <div className="w-24 h-24 bg-white/30 rounded-3xl flex items-center justify-center mx-auto mb-8 animate-pulse backdrop-blur-sm">
               <Trophy className="w-12 h-12" />
             </div>
             
-            <h2 className="text-5xl font-bold mb-6">Ready to Start Your Journey?</h2>
-            <p className="text-xl opacity-90 mb-12 max-w-3xl mx-auto leading-relaxed">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Start Your Journey?</h2>
+            <p className="text-lg md:text-xl opacity-95 mb-12 max-w-3xl mx-auto leading-relaxed">
               Join thousands of successful graduates who transformed their careers through the PET program. Your future starts with a single step.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 px-10 py-4 text-lg shadow-xl">
+              <Button size="lg" className="bg-white text-[#9a4eae] hover:bg-white/90 hover:scale-105 transition-all duration-300 px-10 py-4 text-lg font-semibold shadow-xl">
                 <User className="mr-2 w-6 h-6" />
                 Apply Now
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-primary hover:scale-105 transition-all duration-300 px-10 py-4 text-lg">
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-[#9a4eae] hover:scale-105 transition-all duration-300 px-10 py-4 text-lg font-semibold">
                 <Calendar className="mr-2 w-6 h-6" />
                 Schedule Consultation
               </Button>
@@ -598,54 +681,115 @@ const PET = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
               <div className="text-center">
                 <div className="text-3xl font-bold mb-2">24hrs</div>
-                <div className="text-sm opacity-80">Response Time</div>
+                <div className="text-sm opacity-90">Response Time</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold mb-2">98%</div>
-                <div className="text-sm opacity-80">Success Rate</div>
+                <div className="text-sm opacity-90">Success Rate</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold mb-2">1000+</div>
-                <div className="text-sm opacity-80">Alumni Network</div>
+                <div className="text-sm opacity-90">Alumni Network</div>
               </div>
             </div>
           </div>
         </div>
         
         {/* Animated background elements */}
-        <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-float"></div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-float" style={{animationDelay: '3s'}}></div>
-        <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-white/5 rounded-full animate-float" style={{animationDelay: '1.5s'}}></div>
+        <div className="absolute top-10 left-10 w-32 h-32 bg-white/20 rounded-full animate-float"></div>
+        <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/20 rounded-full animate-float" style={{animationDelay: '3s'}}></div>
+        <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-white/10 rounded-full animate-float" style={{animationDelay: '1.5s'}}></div>
       </section>
 
       <style>{`
         .animate-stagger > * {
           opacity: 0;
-          animation: slide-up 0.8s ease-out forwards;
+          transform: translateY(20px);
+          animation: fadeInUp 0.6s forwards;
         }
-
+        
         .animate-stagger > *:nth-child(1) { animation-delay: 0.1s; }
-        .animate-stagger > *:nth-child(2) { animation-delay: 0.3s; }
-        .animate-stagger > *:nth-child(3) { animation-delay: 0.5s; }
-        .animate-stagger > *:nth-child(4) { animation-delay: 0.7s; }
-        .animate-stagger > *:nth-child(5) { animation-delay: 0.9s; }
-
-        .phase-highlight {
-          animation: glow-pulse 2s ease-in-out infinite;
+        .animate-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+        .animate-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+        .animate-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+        .animate-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+        
+        .animate-slide-up {
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInUp 0.8s forwards;
         }
-
-        @keyframes track-select {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.05); }
-          100% { transform: scale(1); }
+        
+        .fade-in-section {
+          opacity: 0;
+          transform: translateY(20px);
+          transition: opacity 1s ease-out, transform 1s ease-out;
         }
-
-        .track-selected {
-          animation: track-select 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        
+        .fade-in-section.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+          100% { transform: translateY(0px); }
+        }
+        
+        .animate-morph {
+          animation: morph 8s ease-in-out infinite;
+        }
+        
+        @keyframes morph {
+          0% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+          50% { border-radius: 30% 60% 70% 40%/50% 60% 30% 60%; }
+          100% { border-radius: 60% 40% 30% 70%/60% 30% 70% 40%; }
+        }
+        
+        .hover-lift {
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .page-enter {
+          animation: pageEnter 0.8s ease-out forwards;
+        }
+        
+        @keyframes pageEnter {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       `}</style>
+
+      <Footer />
     </div>
   );
 };
 
-export default PET;
+export default Screening;
