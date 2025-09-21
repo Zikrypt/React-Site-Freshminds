@@ -163,9 +163,9 @@ const Contact = () => {
       </section>
 
       {/* Contact Form and Info Section */}
-      <section className="py-24 px-4">
+      <section className="py-12 md:py-24 px-4 overflow-x-hidden">
         <div className="container mx-auto max-w-7xl">
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
             
             {/* Contact Form */}
             <div className="scroll-animate">
@@ -288,20 +288,20 @@ const Contact = () => {
                 <h3 className="text-3xl font-bold text-gradient mb-8">
                   Follow Us
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
                   {socialLinks.map((social, index) => (
                     <Card key={index} className="modern-card hover:scale-105 transition-transform duration-300">
-                      <CardContent className="p-4">
+                      <CardContent className="p-3 sm:p-4">
                         <a
                           href={social.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`flex flex-col items-center space-y-2 text-foreground ${social.color} transition-colors`}
+                          className={`flex flex-col items-center space-y-2 text-foreground ${social.color} transition-colors min-w-0`}
                         >
-                          <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-primary-foreground">
+                          <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-primary-foreground flex-shrink-0">
                             {social.icon}
                           </div>
-                          <span className="text-sm font-medium">{social.name}</span>
+                          <span className="text-xs sm:text-sm font-medium text-center truncate w-full">{social.name}</span>
                         </a>
                       </CardContent>
                     </Card>
@@ -317,17 +317,17 @@ const Contact = () => {
                       Office Hours
                     </h3>
                     <div className="space-y-3 text-foreground">
-                      <div className="flex justify-between">
-                        <span>Monday - Friday:</span>
-                        <span className="font-medium">9:00 AM - 6:00 PM</span>
+                      <div className="flex justify-between items-start">
+                        <span className="text-sm sm:text-base flex-shrink-0">Monday - Friday:</span>
+                        <span className="font-medium text-sm sm:text-base text-right">9:00 AM - 6:00 PM</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Saturday:</span>
-                        <span className="font-medium">10:00 AM - 4:00 PM</span>
+                      <div className="flex justify-between items-start">
+                        <span className="text-sm sm:text-base flex-shrink-0">Saturday:</span>
+                        <span className="font-medium text-sm sm:text-base text-right">10:00 AM - 4:00 PM</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>Sunday:</span>
-                        <span className="font-medium">Closed</span>
+                      <div className="flex justify-between items-start">
+                        <span className="text-sm sm:text-base flex-shrink-0">Sunday:</span>
+                        <span className="font-medium text-sm sm:text-base text-right">Closed</span>
                       </div>
                     </div>
                     <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
