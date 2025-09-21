@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import Footer from "@/components/Footer";
+
 import { 
   Instagram, 
   Linkedin, 
@@ -126,7 +126,7 @@ const Contact = () => {
   return (
     <div className="min-h-screen page-enter">
       {/* Modern Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
+      <section className="relative pt-16 md:pt-20 pb-20 px-4 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
         <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
         
         {/* Floating badges */}
@@ -363,7 +363,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 };
