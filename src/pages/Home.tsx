@@ -230,8 +230,8 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Hero Section - Updated with HTML content */}
-      <section id="home" className="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-background via-primary/5 to-secondary/10">
+      {/* Hero Section - Updated with HTML content - Fixed mobile padding */}
+      <section id="home" className="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 bg-gradient-to-br from-background via-primary/5 to-secondary/10">
         <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
         
         {/* Floating Badges */}
