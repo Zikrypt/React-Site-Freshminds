@@ -22,6 +22,7 @@ const Footer = () => {
               <li><Link to="/Contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Contact</Link></li>
             </ul>
           </div>
+          
           <div>
             <h4 className="text-xl font-bold mb-4">Connect</h4>
             <ul className="space-y-2">
@@ -32,6 +33,7 @@ const Footer = () => {
             </ul>
           </div>
         </div>
+        
         <div className="border-t border-primary-foreground/20 pt-8 text-center">
           <p className="text-primary-foreground/60">
             © 2025 Pekamy Freshminds. All rights reserved.

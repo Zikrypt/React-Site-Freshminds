@@ -15,7 +15,10 @@ import {
   Filter,
   Eye
 } from "lucide-react";
-
+import forblog2 from "@/images/forblog2.jpg.jpg";
+import hiring from "@/images/hiring.jpg.jpg";
+import jobseeker from "@/images/jobseeker.jpg";
+import pet from "@/images/pet.jpg";
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -43,7 +46,7 @@ const Blog = () => {
       title: "The Skills Employers Want (But Schools Don't Teach)",
       subtitle: "Why Being Book-Smart Isn't Enough Anymore", 
       excerpt: "It's no secret that academic excellence is still respected. But in today's job market, that alone is not enough. Many Nigerian graduates leave school with impressive GPAs...",
-      image: "/images/hiring.jpg.jpg",
+      image: "/images/hiring.jpg",
       link: "/blog/article2",
       category: "Skills",
       readTime: "7 min read",
@@ -57,7 +60,7 @@ const Blog = () => {
       title: "How to Stand Out When You Have No Work Experience",
       subtitle: "What You Have is More Valuable Than You Think",
       excerpt: "You just graduated, your CV looks empty, and every job says '2 years experience needed.' Sound familiar? You're not alone. But here's the truth: everyone starts somewhere...",
-      image: "/images/resume.jpg",
+      image: "/images/jobseeker.jpg",
       link: "/blog/article3",
       category: "Job Search",
       readTime: "6 min read",

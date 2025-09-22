@@ -360,107 +360,137 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* About Section - Enhanced with HTML content */}
-      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 scroll-animate">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
-              About Us
-            </h2>
-          </div>
+<section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16 scroll-animate">
+      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+        About Us
+      </h2>
+    </div>
 
-          <article className="scroll-animate">
-            <div className="float-container grid lg:grid-cols-2 gap-16 items-center mb-16">
-              <figure className="float-img">
-                <div className="w-full h-80 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
-                  <div className="text-center">
-                    <Users className="w-24 h-24 text-primary mx-auto mb-4" />
-                    <p className="text-primary font-semibold">Pekamy Logo</p>
-                  </div>
-                </div>
-              </figure>
-              <div className="float-text space-y-6">
-                <h3 className="text-2xl font-bold text-foreground">
-                  At Pekamy Freshminds, we connect skilled interns, NYSC members, students, graduates, and freshers with real companies looking for support with forward thinking companies ready to grow
-                </h3>
-                <ul className="space-y-4">
-                  {keyBenefits.map((benefit, index) => (
-                    <li key={index} className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground flex-shrink-0">
-                        {benefit.icon}
-                      </div>
-                      <strong className="text-foreground">{benefit.title}</strong>
-                    </li>
-                  ))}
-                </ul>
+    <article className="scroll-animate">
+      <div className="float-container grid lg:grid-cols-2 gap-16 items-center mb-16">
+        <figure className="float-img">
+          <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
+            <img 
+              src="/images/logo.png.jpg" 
+              alt="Pekamy Logo" 
+              className="w-full h-full object-contain p-4"/>
+            <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
+              <div className="text-center">
+                <Users className="w-24 h-24 text-primary mx-auto mb-4" />
+                <p className="text-primary font-semibold">Pekamy Logo</p>
               </div>
             </div>
-          </article>
-          
-          <article className="scroll-animate">
-            <div className="float-container grid lg:grid-cols-2 gap-16 items-center">
-              <figure className="float-img">
-                <div className="w-full h-80 bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center">
-                  <div className="text-center">
-                    <Briefcase className="w-24 h-24 text-secondary mx-auto mb-4" />
-                    <p className="text-secondary font-semibold">We are here for you</p>
-                  </div>
+          </div>
+        </figure>
+        <div className="float-text space-y-6">
+          <h3 className="text-2xl font-bold text-foreground">
+            At Pekamy Freshminds, we connect skilled interns, NYSC members, students, graduates, and freshers with real companies looking for support with forward thinking companies ready to grow
+          </h3>
+          <ul className="space-y-4">
+            {keyBenefits.map((benefit, index) => (
+              <li key={index} className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground flex-shrink-0">
+                  {benefit.icon}
                 </div>
-              </figure>
-              <div className="float-text">
-                <h3 className="text-2xl font-bold text-foreground mb-6">
-                  PFM is a growing community built to unlock career opportunities for individuals at every stage of their journey. Whether you're just starting out, looking to gain experience, or seeking to showcase your skills, <strong>Pekamy Freshminds</strong> bridges the gap between talent and opportunity.
-                </h3>
+                <strong className="text-foreground">{benefit.title}</strong>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </article>
+    
+    <article className="scroll-animate">
+      <div className="float-container grid lg:grid-cols-2 gap-16 items-center">
+        <figure className="float-img">
+          <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
+            <img 
+              src="/images/model.jpg.jpg" 
+              alt="We are here for you" 
+              className="w-full h-full object-cover"
+            
+            />
+            <div className="hidden w-full h-full bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center">
+              <div className="text-center">
+                <Briefcase className="w-24 h-24 text-secondary mx-auto mb-4" />
+                <p className="text-secondary font-semibold">We are here for you</p>
               </div>
             </div>
-          </article>
+          </div>
+        </figure>
+        <div className="float-text">
+          <h3 className="text-2xl font-bold text-foreground mb-6">
+            PFM is a growing community built to unlock career opportunities for individuals at every stage of their journey. Whether you're just starting out, looking to gain experience, or seeking to showcase your skills, <strong>Pekamy Freshminds</strong> bridges the gap between talent and opportunity.
+          </h3>
         </div>
-      </section>
-
-      {/* Image Scroll Section - Added from HTML */}
-      <section className="image-scroll-section py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-          <div className="image-card group">
-            <Link to="/blog" className="block">
-              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center">
-                  <Sparkles className="w-16 h-16 text-blue-600" />
-                </div>
-                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
-                  <div className="text-white font-semibold">Empowering Fresh Minds</div>
-                </div>
-              </div>
-            </Link>
+      </div>
+    </article>
+  </div>
+</section>
+{/* Image Scroll Section - Added from HTML */}
+<section className="image-scroll-section py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
+  <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+    <div className="image-card group">
+      <Link to="/blog" className="block">
+        <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+          <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+            <img 
+              src="/images/freshminds.jpg" 
+              alt="Empowering Fresh Minds" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <div className="hidden w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center">
+              <Sparkles className="w-16 h-16 text-blue-600" />
+            </div>
           </div>
-
-          <div className="image-card group">
-            <a href="#cert-section" className="block">
-              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <div className="w-full h-64 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
-                  <Shield className="w-16 h-16 text-green-600" />
-                </div>
-                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
-                  <div className="text-white font-semibold">Officially Recognized by the Federal Government of Nigeria</div>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div className="image-card group">
-            <Link to="/pet" className="block">
-              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-                <div className="w-full h-64 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
-                  <Target className="w-16 h-16 text-purple-600" />
-                </div>
-                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
-                  <div className="text-white font-semibold">The Future Begins Here</div>
-                </div>
-              </div>
-            </Link>
+          <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+            <div className="text-white font-semibold">Empowering Fresh Minds</div>
           </div>
         </div>
-      </section>
+      </Link>
+    </div>
+
+    <div className="image-card group">
+      <a href="#cert-section" className="block">
+        <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+          <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+            <img 
+              src="/images/verified.jpg.jpg" 
+              alt="Officially Recognized by the Federal Government of Nigeria" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <div className="hidden w-full h-64 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
+              <Shield className="w-16 h-16 text-green-600" />
+            </div>
+          </div>
+          <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+            <div className="text-white font-semibold">Officially Recognized by the Federal Government of Nigeria</div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div className="image-card group">
+      <Link to="/screening" className="block">
+        <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+          <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+            <img 
+              src="/images/future.jpg" 
+              alt="The Future Begins Here" 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+            <div className="hidden w-full h-64 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
+              <Target className="w-16 h-16 text-purple-600" />
+            </div>
+          </div>
+          <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+            <div className="text-white font-semibold">The Future Begins Here</div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  </div>
+</section>
 
       {/* How it Works Section - Added from HTML */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
@@ -631,41 +661,47 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/* Government Certification Section - Added from HTML */}
-      <article id="cert-section" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 to-secondary/10">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 scroll-animate">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
-              Officially Recognized by the Federal Government of Nigeria
-            </h2>
-          </div>
+<article id="cert-section" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 to-secondary/10">
+  <div className="max-w-7xl mx-auto">
+    <div className="text-center mb-16 scroll-animate">
+      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+        Officially Recognized by the Federal Government of Nigeria
+      </h2>
+    </div>
 
-          <div className="float-container grid lg:grid-cols-2 gap-16 items-center scroll-animate">
-            <figure className="float-img">
-              <div className="w-full h-80 bg-gradient-to-br from-green-200 to-blue-200 rounded-2xl shadow-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <Shield className="w-24 h-24 text-green-600 mx-auto mb-4" />
-                  <p className="text-green-800 font-semibold">Our Certification</p>
-                </div>
-              </div>
-            </figure>
-            <div className="float-text space-y-6">
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
-                  <Shield className="w-6 h-6" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">Government Approved Platform</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We are proud to be a government approved platform, recognized for our commitment to excellence, transparency, and national development. Our operations are fully aligned with federal regulations and national standards.
-                  </p>
-                </div>
-              </div>
+    <div className="float-container grid lg:grid-cols-2 gap-16 items-center scroll-animate">
+      <figure className="float-img">
+        <div className="w-full h-80 bg-gray-100 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
+          <img 
+            src="/images/verified.jpg.jpg" 
+            alt="Government Certification" 
+     
+          />
+          <div className="hidden w-full h-80 bg-gradient-to-br from-green-200 to-blue-200 rounded-2xl flex items-center justify-center">
+            <div className="text-center">
+              <Shield className="w-24 h-24 text-green-600 mx-auto mb-4" />
+              <p className="text-green-800 font-semibold">Our Certification</p>
             </div>
           </div>
         </div>
-      </article>
+      </figure>
+      <div className="float-text space-y-6">
+        <div className="flex items-start space-x-4">
+          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
+            <Shield className="w-6 h-6" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold text-foreground mb-2">Government Approved Platform</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              We are proud to be a government approved platform, recognized for our commitment to excellence, transparency, and national development. Our operations are fully aligned with federal regulations and national standards.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
 
       {/* Stats Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-primary/5">
