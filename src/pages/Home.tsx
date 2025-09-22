@@ -376,7 +376,9 @@ const Home = () => {
             <img 
               src="/images/logo.png.jpg" 
               alt="Pekamy Logo" 
-              className="w-full h-full object-contain p-4"/>
+              className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+              style={{filter: 'drop-shadow(0 10px 30px rgba(154, 78, 174, 0.3))'}}
+            />
             <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
               <div className="text-center">
                 <Users className="w-24 h-24 text-primary mx-auto mb-4" />
@@ -408,10 +410,10 @@ const Home = () => {
         <figure className="float-img">
           <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
             <img 
-              src="/images/model.jpg.jpg" 
+              src="/images/community.jpg" 
               alt="We are here for you" 
-              className="w-full h-full object-cover"
-            
+              className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+              style={{filter: 'brightness(1.1) contrast(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.25))'}}
             />
             <div className="hidden w-full h-full bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center">
               <div className="text-center">
@@ -459,7 +461,9 @@ const Home = () => {
             <img 
               src="/images/verified.jpg.jpg" 
               alt="Officially Recognized by the Federal Government of Nigeria" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              style={{filter: 'brightness(1.05) saturate(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.2))'}}
+            />
             <div className="hidden w-full h-64 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
               <Shield className="w-16 h-16 text-green-600" />
             </div>
@@ -674,9 +678,10 @@ const Home = () => {
       <figure className="float-img">
         <div className="w-full h-80 bg-gray-100 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
           <img 
-            src="/images/verified.jpg.jpg" 
+            src="/images/verified.jpg" 
             alt="Government Certification" 
-     
+            className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+            style={{filter: 'brightness(1.05) saturate(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.25))'}}
           />
           <div className="hidden w-full h-80 bg-gradient-to-br from-green-200 to-blue-200 rounded-2xl flex items-center justify-center">
             <div className="text-center">

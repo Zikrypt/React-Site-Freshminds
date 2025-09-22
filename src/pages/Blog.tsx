@@ -15,17 +15,14 @@ import {
   Filter,
   Eye
 } from "lucide-react";
-import forblog2 from "@/images/forblog2.jpg.jpg";
-import hiring from "@/images/hiring.jpg.jpg";
-import jobseeker from "@/images/jobseeker.jpg";
-import pet from "@/images/pet.jpg";
+
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [visibleArticles, setVisibleArticles] = useState(6);
   const [isLoading, setIsLoading] = useState(false);
   const [heroStatsVisible, setHeroStatsVisible] = useState(false);
-
+  
   const articles = [
     {
       id: 1,
@@ -74,7 +71,7 @@ const Blog = () => {
       title: "Why Internships Matter More Than Ever in Nigeria",
       subtitle: "A Smart First Step Into a Tough Market",
       excerpt: "Internships are no longer just for passing time during ASUU strikes. In today's Nigeria, they are a serious stepping stone into the professional world...",
-      image: "/images/pet.jpg",
+      image: "/images/pet.jpg.jpg",
       link: "/blog/article4",
       category: "Internships",
       readTime: "4 min read",
