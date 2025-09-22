@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Briefcase, Target, ArrowUp, Sparkles, Zap, Shield, Award, CheckCircle, Star, Globe, TrendingUp, MessageSquare, Camera, Megaphone, BarChart3, UserPlus, ChevronLeft, ChevronRight, Info, Route, Mail, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
+import { SpringMouseFollow } from "@/components/ui/MouseFollowBackground"; // Add this import
 
 const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);

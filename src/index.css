@@ -319,19 +319,8 @@
     box-shadow: var(--shadow-elegant);
   }
 
-  /* Footer Reveal Animation (inspired by rejouice.com) */
-  .footer-reveal {
-    transform: translateY(100px);
-    opacity: 0;
-    animation: footerReveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  }
-
-  @keyframes footerReveal {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+  /* REMOVED FOOTER REVEAL ANIMATION TO AVOID CONFLICTS */
+  /* Let Framer Motion handle footer animations instead */
 
   /* Scroll-triggered animations */
   .scroll-animate {
@@ -639,6 +628,5 @@ img {
   object-fit: cover;
   border-radius: 0.5rem;
 }
-
 
 }
