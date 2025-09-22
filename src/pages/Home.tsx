@@ -9,6 +9,7 @@ const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [currentServiceSlide, setCurrentServiceSlide] = useState(0);
+  const [heroStatsVisible, setHeroStatsVisible] = useState(false);
 
   const features = [
     {
@@ -155,7 +156,46 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Custom hook for counting animation
+  const useCountAnimation = (endValue, startCounting) => {
+    const [count, setCount] = useState(0);
+    
+    useEffect(() => {
+      if (!startCounting) return;
+      
+      let startTime = null;
+      const duration = 2000; // 2 seconds
+      
+      const animate = (currentTime) => {
+        if (startTime === null) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.floor(endValue * easeOutCubic));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setCount(endValue);
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    }, [endValue, startCounting]);
+    
+    return count;
+  };
+
+  // Count animations for hero stats
+  const studentsCount = useCountAnimation(500, heroStatsVisible);
+  const companiesCount = useCountAnimation(150, heroStatsVisible);
+  const storiesCount = useCountAnimation(1000, heroStatsVisible);
+
   useEffect(() => {
+    // Start counting animation immediately when page loads
+    setHeroStatsVisible(true);
+    
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
       
@@ -271,18 +311,18 @@ const Home = () => {
               </p>
             </div>
 
-            {/* Hero Stats - Added from HTML */}
+            {/* Hero Stats - Added from HTML with counting animation */}
             <div className="hero-stats hero-reveal hero-reveal-delay-3 grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8">
               <div className="stat-item text-center">
-                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">500+</span>
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">{studentsCount}+</span>
                 <span className="stat-label block text-sm text-muted-foreground">Students Empowered</span>
               </div>
               <div className="stat-item text-center">
-                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">150+</span>
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">{companiesCount}+</span>
                 <span className="stat-label block text-sm text-muted-foreground">Partner Companies</span>
               </div>
               <div className="stat-item text-center">
-                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">1000+</span>
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">{storiesCount}+</span>
                 <span className="stat-label block text-sm text-muted-foreground">Success Stories</span>
               </div>
             </div>
