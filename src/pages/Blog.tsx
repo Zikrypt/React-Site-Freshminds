@@ -13,8 +13,12 @@ import {
   BookOpen, 
   TrendingUp,
   Filter,
-  Eye
+  Eye,
+  Home,
+  Mail,
+  Route
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -29,7 +33,7 @@ const Blog = () => {
       title: "The Experience Gap in Nigeria: How Pekamy Fresh Minds is Bridging the Divide",
       subtitle: "Skilled But Unfit for Work? We are Changing That",
       excerpt: "In today's world, acquiring knowledge is no longer enough. While education provides the foundation, it's the ability to apply that knowledge in real-world settings that makes someone truly employable...",
-      image: "/images/forblog2.jpg",
+      image: "/images/mentorship.jpg",
       link: "/blog/article1",
       category: "Career Development",
       readTime: "5 min read",
@@ -43,7 +47,7 @@ const Blog = () => {
       title: "The Skills Employers Want (But Schools Don't Teach)",
       subtitle: "Why Being Book-Smart Isn't Enough Anymore", 
       excerpt: "It's no secret that academic excellence is still respected. But in today's job market, that alone is not enough. Many Nigerian graduates leave school with impressive GPAs...",
-      image: "/images/hiring.jpg",
+      image: "/images/graduate.jpg",
       link: "/blog/article2",
       category: "Skills",
       readTime: "7 min read",
@@ -71,7 +75,7 @@ const Blog = () => {
       title: "Why Internships Matter More Than Ever in Nigeria",
       subtitle: "A Smart First Step Into a Tough Market",
       excerpt: "Internships are no longer just for passing time during ASUU strikes. In today's Nigeria, they are a serious stepping stone into the professional world...",
-      image: "/images/pet.jpg.jpg",
+      image: "/images/internship.jpg",
       link: "/blog/article4",
       category: "Internships",
       readTime: "4 min read",
@@ -166,6 +170,40 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-background page-enter">
+      {/* Header Navigation */}
+      <header className="main-header fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md border-b shadow-sm">
+        <div className="header-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="logo-section">
+              <h1 className="blog-title text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Pekamy Freshminds Blog
+              </h1>
+              <p className="text-xs text-muted-foreground">Stories, Insights & Growth</p>
+            </div>
+
+            <nav className="main-nav hidden md:block">
+              <ul className="nav-list flex items-baseline space-x-4">
+                <li>
+                  <Link to="/" className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Home className="w-4 h-4 mr-1" /> Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/screening" className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Route className="w-4 h-4 mr-1" /> PET Program
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-gray-700 hover:text-primary px-3 py-2 rounded-md text-sm font-medium flex items-center">
+                    <Mail className="w-4 h-4 mr-1" /> Contact Us
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
       {/* Modern Hero Section */}
       <section className="pt-28 pb-16 px-4 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 relative overflow-hidden">
         <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
@@ -285,8 +323,12 @@ const Blog = () => {
               <div className="grid md:grid-cols-2 gap-8">
                 {featuredArticles.map((article, index) => (
                   <Card key={article.id} className="modern-card overflow-hidden scroll-animate" style={{ animationDelay: `${index * 0.2}s` }}>
-                    <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                      <BookOpen className="w-12 h-12 text-primary/50" />
+                    <div className="aspect-video overflow-hidden bg-gray-100">
+                      <img 
+                        src={article.image} 
+                        alt={article.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
                     <CardContent className="p-8">
                       <div className="flex items-center gap-4 mb-4">
@@ -324,8 +366,12 @@ const Blog = () => {
             <div className="modern-grid">
               {regularArticles.slice(0, visibleArticles).map((article, index) => (
                 <Card key={article.id} className="modern-card overflow-hidden scroll-animate" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="aspect-video bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                    <BookOpen className="w-8 h-8 text-primary/50" />
+                  <div className="aspect-video overflow-hidden bg-gray-100">
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4 mb-4">
@@ -393,6 +439,137 @@ const Blog = () => {
           </div>
         </div>
       </section>
+
+      {/* CSS Styles */}
+      <style>{`
+        .scroll-animate {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .scroll-animate.in-view {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .hero-reveal {
+          opacity: 0;
+          transform: translateY(50px);
+          animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .hero-reveal-delay-1 {
+          animation-delay: 0.3s;
+        }
+        
+        .hero-reveal-delay-2 {
+          animation-delay: 0.6s;
+        }
+        
+        .hero-reveal-delay-3 {
+          animation-delay: 0.9s;
+        }
+        
+        .floating-badge {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        .page-enter {
+          animation: pageEnter 0.8s ease-out forwards;
+        }
+        
+        @keyframes pageEnter {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .modern-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 2rem;
+        }
+        
+        .modern-card {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+        }
+        
+        .modern-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-effect {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-modern {
+          background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+          color: hsl(var(--primary-foreground));
+          border: none;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-modern:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .text-gradient {
+          background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .display-text {
+          font-size: clamp(4rem, 8vw, 8rem);
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          line-height: 0.9;
+        }
+        
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+      `}</style>
 
       <Footer />
     </div>

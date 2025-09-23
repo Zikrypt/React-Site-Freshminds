@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Users, Briefcase, Target, ArrowUp, Sparkles, Zap, Shield, Award, CheckCircle, Star, Globe, TrendingUp, MessageSquare, Camera, Megaphone, BarChart3, UserPlus, ChevronLeft, ChevronRight, Info, Route, Mail, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
-import { SpringMouseFollow } from "@/components/ui/MouseFollowBackground"; // Add this import
+import Footer from "@/components/Footer"; // Import the Footer component
 
 const Home = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -200,7 +200,7 @@ const Home = () => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
       
-      // Add scroll animation observer
+      // Add scroll animation observer for regular elements
       const elements = document.querySelectorAll('.scroll-animate');
       elements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
@@ -361,141 +361,143 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       {/* About Section - Enhanced with HTML content */}
-<section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center mb-16 scroll-animate">
-      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
-        About Us
-      </h2>
-    </div>
-
-    <article className="scroll-animate">
-      <div className="float-container grid lg:grid-cols-2 gap-16 items-center mb-16">
-        <figure className="float-img">
-          <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
-            <img 
-              src="/images/logo.png.jpg" 
-              alt="Pekamy Logo" 
-              className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
-              style={{filter: 'drop-shadow(0 10px 30px rgba(154, 78, 174, 0.3))'}}
-            />
-            <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
-              <div className="text-center">
-                <Users className="w-24 h-24 text-primary mx-auto mb-4" />
-                <p className="text-primary font-semibold">Pekamy Logo</p>
-              </div>
-            </div>
+      <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              About Us
+            </h2>
           </div>
-        </figure>
-        <div className="float-text space-y-6">
-          <h3 className="text-2xl font-bold text-foreground">
-            At Pekamy Freshminds, we connect skilled interns, NYSC members, students, graduates, and freshers with real companies looking for support with forward thinking companies ready to grow
-          </h3>
-          <ul className="space-y-4">
-            {keyBenefits.map((benefit, index) => (
-              <li key={index} className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground flex-shrink-0">
-                  {benefit.icon}
+
+          <article className="scroll-animate">
+            <div className="float-container grid lg:grid-cols-2 gap-16 items-center mb-16">
+              <figure className="float-img">
+                <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/logo.png.jpg" 
+                    alt="Pekamy Logo" 
+                    className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                    style={{filter: 'drop-shadow(0 10px 30px rgba(154, 78, 174, 0.3))'}}
+                  />
+                  <div className="hidden w-full h-full bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl flex items-center justify-center">
+                    <div className="text-center">
+                      <Users className="w-24 h-24 text-primary mx-auto mb-4" />
+                      <p className="text-primary font-semibold">Pekamy Logo</p>
+                    </div>
+                  </div>
                 </div>
-                <strong className="text-foreground">{benefit.title}</strong>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </article>
-    
-    <article className="scroll-animate">
-      <div className="float-container grid lg:grid-cols-2 gap-16 items-center">
-        <figure className="float-img">
-          <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
-            <img 
-              src="/images/community.jpg" 
-              alt="We are here for you" 
-              className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
-              style={{filter: 'brightness(1.1) contrast(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.25))'}}
-            />
-            <div className="hidden w-full h-full bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center">
-              <div className="text-center">
-                <Briefcase className="w-24 h-24 text-secondary mx-auto mb-4" />
-                <p className="text-secondary font-semibold">We are here for you</p>
+              </figure>
+              <div className="float-text space-y-6">
+                <h3 className="text-2xl font-bold text-foreground">
+                  At Pekamy Freshminds, we connect skilled interns, NYSC members, students, graduates, and freshers with real companies looking for support with forward thinking companies ready to grow
+                </h3>
+                <ul className="space-y-4">
+                  {keyBenefits.map((benefit, index) => (
+                    <li key={index} className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-primary-foreground flex-shrink-0">
+                        {benefit.icon}
+                      </div>
+                      <strong className="text-foreground">{benefit.title}</strong>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </div>
-        </figure>
-        <div className="float-text">
-          <h3 className="text-2xl font-bold text-foreground mb-6">
-            PFM is a growing community built to unlock career opportunities for individuals at every stage of their journey. Whether you're just starting out, looking to gain experience, or seeking to showcase your skills, <strong>Pekamy Freshminds</strong> bridges the gap between talent and opportunity.
-          </h3>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-{/* Image Scroll Section - Added from HTML */}
-<section className="image-scroll-section py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
-  <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
-    <div className="image-card group">
-      <Link to="/blog" className="block">
-        <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-          <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
-            <img 
-              src="/images/freshminds.jpg" 
-              alt="Empowering Fresh Minds" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-            <div className="hidden w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center">
-              <Sparkles className="w-16 h-16 text-blue-600" />
+          </article>
+          
+          <article className="scroll-animate">
+            <div className="float-container grid lg:grid-cols-2 gap-16 items-center">
+              <figure className="float-img">
+                <div className="w-full h-80 bg-gray-100 rounded-2xl flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/community.jpg" 
+                    alt="We are here for you" 
+                    className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                    style={{filter: 'brightness(1.1) contrast(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.25))'}}
+                  />
+                  <div className="hidden w-full h-full bg-gradient-to-br from-secondary/20 to-primary/20 rounded-2xl flex items-center justify-center">
+                    <div className="text-center">
+                      <Briefcase className="w-24 h-24 text-secondary mx-auto mb-4" />
+                      <p className="text-secondary font-semibold">We are here for you</p>
+                    </div>
+                  </div>
+                </div>
+              </figure>
+              <div className="float-text">
+                <h3 className="text-2xl font-bold text-foreground mb-6">
+                  PFM is a growing community built to unlock career opportunities for individuals at every stage of their journey. Whether you're just starting out, looking to gain experience, or seeking to showcase your skills, <strong>Pekamy Freshminds</strong> bridges the gap between talent and opportunity.
+                </h3>
+              </div>
             </div>
-          </div>
-          <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
-            <div className="text-white font-semibold">Empowering Fresh Minds</div>
-          </div>
+          </article>
         </div>
-      </Link>
-    </div>
+      </section>
 
-    <div className="image-card group">
-      <a href="#cert-section" className="block">
-        <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-          <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
-            <img 
-              src="/images/verified.jpg.jpg" 
-              alt="Officially Recognized by the Federal Government of Nigeria" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              style={{filter: 'brightness(1.05) saturate(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.2))'}}
-            />
-            <div className="hidden w-full h-64 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
-              <Shield className="w-16 h-16 text-green-600" />
-            </div>
+      {/* Image Scroll Section - Added from HTML */}
+      <section className="image-scroll-section py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/20 to-background">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+          <div className="image-card group">
+            <Link to="/blog" className="block">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/freshminds.jpg" 
+                    alt="Empowering Fresh Minds" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                  <div className="hidden w-full h-64 bg-gradient-to-br from-blue-200 to-purple-200 flex items-center justify-center">
+                    <Sparkles className="w-16 h-16 text-blue-600" />
+                  </div>
+                </div>
+                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+                  <div className="text-white font-semibold">Empowering Fresh Minds</div>
+                </div>
+              </div>
+            </Link>
           </div>
-          <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
-            <div className="text-white font-semibold">Officially Recognized by the Federal Government of Nigeria</div>
-          </div>
-        </div>
-      </a>
-    </div>
 
-    <div className="image-card group">
-      <Link to="/screening" className="block">
-        <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
-          <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
-            <img 
-              src="/images/future.jpg" 
-              alt="The Future Begins Here" 
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
-            <div className="hidden w-full h-64 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
-              <Target className="w-16 h-16 text-purple-600" />
-            </div>
+          <div className="image-card group">
+            <a href="#cert-section" className="block">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/verified.jpg" 
+                    alt="Officially Recognized by the Federal Government of Nigeria" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    style={{filter: 'brightness(1.05) saturate(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.2))'}}
+                  />
+                  <div className="hidden w-full h-64 bg-gradient-to-br from-green-200 to-blue-200 flex items-center justify-center">
+                    <Shield className="w-16 h-16 text-green-600" />
+                  </div>
+                </div>
+                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+                  <div className="text-white font-semibold">Officially Recognized by the Federal Government of Nigeria</div>
+                </div>
+              </div>
+            </a>
           </div>
-          <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
-            <div className="text-white font-semibold">The Future Begins Here</div>
+
+          <div className="image-card group">
+            <Link to="/screening" className="block">
+              <div className="relative overflow-hidden rounded-2xl shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                <div className="w-full h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/images/future.jpg" 
+                    alt="The Future Begins Here" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"/>
+                  <div className="hidden w-full h-64 bg-gradient-to-br from-purple-200 to-pink-200 flex items-center justify-center">
+                    <Target className="w-16 h-16 text-purple-600" />
+                  </div>
+                </div>
+                <div className="image-overlay absolute inset-0 bg-black/50 flex items-end p-6">
+                  <div className="text-white font-semibold">The Future Begins Here</div>
+                </div>
+              </div>
+            </Link>
           </div>
         </div>
-      </Link>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* How it Works Section - Added from HTML */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-muted/20">
@@ -666,48 +668,49 @@ const Home = () => {
           </div>
         </div>
       </section>
-      {/* Government Certification Section - Added from HTML */}
-<article id="cert-section" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 to-secondary/10">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center mb-16 scroll-animate">
-      <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
-        Officially Recognized by the Federal Government of Nigeria
-      </h2>
-    </div>
 
-    <div className="float-container grid lg:grid-cols-2 gap-16 items-center scroll-animate">
-      <figure className="float-img">
-        <div className="w-full h-80 bg-gray-100 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
-          <img 
-            src="/images/verified.jpg" 
-            alt="Government Certification" 
-            className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
-            style={{filter: 'brightness(1.05) saturate(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.25))'}}
-          />
-          <div className="hidden w-full h-80 bg-gradient-to-br from-green-200 to-blue-200 rounded-2xl flex items-center justify-center">
-            <div className="text-center">
-              <Shield className="w-24 h-24 text-green-600 mx-auto mb-4" />
-              <p className="text-green-800 font-semibold">Our Certification</p>
+      {/* Government Certification Section - Added from HTML */}
+      <article id="cert-section" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/5 to-secondary/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
+              Officially Recognized by the Federal Government of Nigeria
+            </h2>
+          </div>
+
+          <div className="float-container grid lg:grid-cols-2 gap-16 items-center scroll-animate">
+            <figure className="float-img">
+              <div className="w-full h-80 bg-gray-100 rounded-2xl shadow-2xl flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/images/verified.jpg" 
+                  alt="Government Certification" 
+                  className="w-full h-full object-cover rounded-xl hover:scale-105 transition-transform duration-300"
+                  style={{filter: 'brightness(1.05) saturate(1.1) drop-shadow(0 8px 25px rgba(154, 78, 174, 0.25))'}}
+                />
+                <div className="hidden w-full h-80 bg-gradient-to-br from-green-200 to-blue-200 rounded-2xl flex items-center justify-center">
+                  <div className="text-center">
+                    <Shield className="w-24 h-24 text-green-600 mx-auto mb-4" />
+                    <p className="text-green-800 font-semibold">Our Certification</p>
+                  </div>
+                </div>
+              </div>
+            </figure>
+            <div className="float-text space-y-6">
+              <div className="flex items-start space-x-4">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
+                  <Shield className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground mb-2">Government Approved Platform</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We are proud to be a government approved platform, recognized for our commitment to excellence, transparency, and national development. Our operations are fully aligned with federal regulations and national standards.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </figure>
-      <div className="float-text space-y-6">
-        <div className="flex items-start space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center text-white flex-shrink-0">
-            <Shield className="w-6 h-6" />
-          </div>
-          <div>
-            <h3 className="text-xl font-bold text-foreground mb-2">Government Approved Platform</h3>
-            <p className="text-muted-foreground leading-relaxed">
-              We are proud to be a government approved platform, recognized for our commitment to excellence, transparency, and national development. Our operations are fully aligned with federal regulations and national standards.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</article>
+      </article>
 
       {/* Stats Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background to-primary/5">
@@ -834,45 +837,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Modern Footer with Reveal Animation */}
-      <footer className="footer-reveal bg-gradient-to-br from-secondary to-primary text-primary-foreground py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
-            <div className="md:col-span-2">
-              <h3 className="text-3xl font-bold text-gradient mb-4">Pekamy Fresh Minds</h3>
-              <p className="text-primary-foreground/80 leading-relaxed max-w-md mb-4">
-                Empowering the next generation of professionals through innovative training, 
-                screening, and placement programs.
-              </p>
-              <p className="text-sm text-primary-foreground/60">Your Next Chapter Starts Here</p>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                <li><a href="#home" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Home</a></li>
-                <li><a href="#about" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">About</a></li>
-                <li><Link to="/pet" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">PET Program</Link></li>
-                <li><Link to="/blog" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Blog</Link></li>
-                <li><Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold mb-4">Connect</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">LinkedIn</a></li>
-                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Instagram</a></li>
-                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Twitter</a></li>
-                <li><a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Facebook</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-primary-foreground/20 pt-8 text-center">
-            <p className="text-primary-foreground/60">
-              © 2025 Pekamy Fresh Minds. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Use the Footer component instead of inline footer */}
+      <Footer />
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
@@ -883,6 +849,123 @@ const Home = () => {
           <ArrowUp className="w-5 h-5" />
         </button>
       )}
+
+      {/* CSS Styles */}
+      <style>{`
+        .scroll-animate {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .scroll-animate.in-view {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .hero-reveal {
+          opacity: 0;
+          transform: translateY(50px);
+          animation: fadeInUp 1s ease-out forwards;
+        }
+        
+        .hero-reveal-delay-1 {
+          animation-delay: 0.3s;
+        }
+        
+        .hero-reveal-delay-2 {
+          animation-delay: 0.6s;
+        }
+        
+        .hero-reveal-delay-3 {
+          animation-delay: 0.9s;
+        }
+        
+        .floating-badge {
+          animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        
+        .page-enter {
+          animation: pageEnter 0.8s ease-out forwards;
+        }
+        
+        @keyframes pageEnter {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .modern-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 2rem;
+        }
+        
+        .modern-card {
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s ease;
+        }
+        
+        .modern-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-effect {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .btn-modern {
+          background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+          color: hsl(var(--primary-foreground));
+          border: none;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-modern:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .text-gradient {
+          background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+        
+        .display-text {
+          font-size: clamp(4rem, 8vw, 8rem);
+          font-weight: 900;
+          letter-spacing: -0.02em;
+          line-height: 0.9;
+        }
+      `}</style>
     </div>
   );
 };
