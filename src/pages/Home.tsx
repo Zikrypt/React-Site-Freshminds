@@ -271,9 +271,18 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Hero Section - Updated with HTML content - Fixed mobile padding */}
-      <section id="home" className="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20 bg-gradient-to-br from-background via-primary/5 to-secondary/10">
-        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+      {/* Hero Section - Updated with background image */}
+      <section id="home" className="hero-section relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 md:pt-20">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("/images/homebg.jpg")',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-primary/20 to-secondary/10"></div>
+        </div>
         
         {/* Floating Badges */}
         <div className="absolute top-20 left-10 floating-badge hidden lg:block">
@@ -301,13 +310,13 @@ const Home = () => {
             </div>
             
             <div className="hero-reveal hero-reveal-delay-1">
-              <h2 className="hero-title text-4xl sm:text-5xl lg:text-7xl font-bold text-foreground leading-tight">
+              <h2 className="hero-title text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-tight">
                 Unleashing Potential, Creating Impact
               </h2>
             </div>
             
             <div className="hero-reveal hero-reveal-delay-2">
-              <p className="hero-description text-xl sm:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="hero-description text-xl sm:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
                 Pekamy Freshminds, where ambition meets possibility.
               </p>
             </div>
@@ -315,23 +324,23 @@ const Home = () => {
             {/* Hero Stats - Added from HTML with counting animation */}
             <div className="hero-stats hero-reveal hero-reveal-delay-3 grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8">
               <div className="stat-item text-center">
-                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">{studentsCount}+</span>
-                <span className="stat-label block text-sm text-muted-foreground">Students Empowered</span>
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-white">{studentsCount}+</span>
+                <span className="stat-label block text-sm text-white/80">Students Empowered</span>
               </div>
               <div className="stat-item text-center">
-                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">{companiesCount}+</span>
-                <span className="stat-label block text-sm text-muted-foreground">Partner Companies</span>
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-white">{companiesCount}+</span>
+                <span className="stat-label block text-sm text-white/80">Partner Companies</span>
               </div>
               <div className="stat-item text-center">
-                <span className="stat-number text-3xl sm:text-4xl font-bold text-gradient">{storiesCount}+</span>
-                <span className="stat-label block text-sm text-muted-foreground">Success Stories</span>
+                <span className="stat-number text-3xl sm:text-4xl font-bold text-white">{storiesCount}+</span>
+                <span className="stat-label block text-sm text-white/80">Success Stories</span>
               </div>
             </div>
             
             <div className="hero-reveal hero-reveal-delay-3 flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
               <Button 
                 size="lg" 
-                className="btn-modern px-8 py-4 text-lg font-semibold rounded-xl"
+                className="btn-modern px-8 py-4 text-lg font-semibold rounded-xl bg-white text-primary hover:bg-white/90"
                 asChild
               >
                 <Link to="/screening">
@@ -343,7 +352,7 @@ const Home = () => {
               <Button 
                 variant="outline" 
                 size="lg"
-                className="glass-effect border-2 px-8 py-4 text-lg font-semibold rounded-xl hover:bg-primary/10"
+                className="glass-effect border-2 border-white text-white px-8 py-4 text-lg font-semibold rounded-xl hover:bg-white/10"
                 asChild
               >
                 <Link to="/contact">
@@ -356,8 +365,8 @@ const Home = () => {
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
@@ -723,249 +732,127 @@ const Home = () => {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center scroll-animate" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center mx-auto mb-4 text-primary-foreground shadow-lg">
+              <div key={index} className="text-center scroll-animate" style={{ animationDelay: `${index * 0.2}s` }}>
+                <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-4 text-primary-foreground">
                   {stat.icon}
                 </div>
-                <div className="text-4xl sm:text-5xl font-bold text-gradient mb-2">{stat.number}</div>
-                <div className="text-muted-foreground font-medium">{stat.label}</div>
+                <div className="text-3xl sm:text-4xl font-bold text-foreground mb-2">{stat.number}</div>
+                <div className="text-muted-foreground">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Testimonials Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-primary/5 to-background">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="scroll-animate mb-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 scroll-animate">
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-6">
               Success Stories
             </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Hear from our talents and partners who have transformed their careers and businesses
+            </p>
           </div>
 
-          <div className="relative overflow-hidden">
-            <div 
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
-            >
-              {testimonials.map((testimonial, index) => (
-                <Card key={index} className="min-w-full modern-card">
-                  <CardContent className="p-12">
-                    <div className="flex justify-center mb-6">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} className={`w-6 h-6 ${i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} />
-                      ))}
-                    </div>
-                    <blockquote className="text-xl sm:text-2xl text-foreground mb-8 leading-relaxed">
-                      "{testimonial.content}"
-                    </blockquote>
-                    <div>
-                      <div className="font-bold text-lg text-foreground">{testimonial.name}</div>
-                      <div className="text-muted-foreground">{testimonial.role}</div>
-                      <div className="text-primary font-medium">{testimonial.company}</div>
-                    </div>
-                  </CardContent>
-                </Card>
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}
+              >
+                {testimonials.map((testimonial, index) => (
+                  <div key={index} className="min-w-full">
+                    <Card className="modern-card testimonial-card mx-auto max-w-4xl">
+                      <CardContent className="p-12 text-center">
+                        <div className="flex justify-center mb-6">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
+                          ))}
+                        </div>
+                        <p className="text-2xl text-muted-foreground leading-relaxed mb-8 italic">
+                          "{testimonial.content}"
+                        </p>
+                        <div>
+                          <div className="font-bold text-foreground text-lg">{testimonial.name}</div>
+                          <div className="text-muted-foreground">{testimonial.role} at {testimonial.company}</div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Testimonial Navigation */}
+            <div className="flex justify-center mt-8 space-x-4">
+              {testimonials.map((_, index) => (
+                <Button
+                  key={index}
+                  variant={index === currentTestimonial ? "default" : "outline"}
+                  size="icon"
+                  onClick={() => setCurrentTestimonial(index)}
+                  className="w-3 h-3 rounded-full p-0"
+                >
+                  <span className="sr-only">Go to testimonial {index + 1}</span>
+                </Button>
               ))}
             </div>
           </div>
-
-          <div className="flex justify-center mt-8 space-x-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentTestimonial(index)}
-                className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                  index === currentTestimonial ? 'bg-primary' : 'bg-primary/30'
-                }`}
-              />
-            ))}
-          </div>
         </div>
       </section>
-
-      {/* FAQ Section - Added from HTML */}
-      <aside className="questionnaire py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5">
-        <div className="max-w-4xl mx-auto scroll-animate">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gradient mb-6">
-              Frequently Asked Questions
-            </h2>
-          </div>
-
-          <Card className="modern-card bg-white/80 backdrop-blur-sm border-0 shadow-xl">
-            <CardContent className="p-8">
-              <details className="group">
-                <summary className="flex items-center justify-between cursor-pointer text-lg font-semibold text-foreground hover:text-primary transition-colors">
-                  <span>How does Pekamy Freshminds uniquely contribute to solving the problem of skilled yet inexperienced individuals struggling to find real opportunities?</span>
-                  <ChevronRight className="w-5 h-5 group-open:rotate-90 transition-transform" />
-                </summary>
-                <div className="mt-6 pl-4 border-l-2 border-primary/20">
-                  <p className="text-muted-foreground leading-relaxed italic">
-                    <em>At Pekamy Freshminds, we believe that while it often takes a group to identify a problem, it takes a bold, committed mind to take action. We've taken that step by creating structured systems aimed at closing the gap between being skilled and being experienced. Our programs offer practical pathways for growth, and we invite you to join the mission. Together, let's become part of a movement that transforms potential into real world impact.</em>
-                  </p>
-                </div>
-              </details>
-            </CardContent>
-          </Card>
-        </div>
-      </aside>
 
       {/* CTA Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/5">
-        <div className="max-w-4xl mx-auto text-center scroll-animate">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gradient mb-8">
-            Ready to Transform Your Future?
-          </h2>
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-12 leading-relaxed">
-            Join thousands of successful graduates who started their journey with Pekamy Fresh Minds
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button size="lg" className="btn-modern px-12 py-4 text-lg font-semibold rounded-xl" asChild>
-              <Link to="/screening">
-                Get Started Today
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-            </Button>
-            <Button variant="outline" size="lg" className="glass-effect border-2 px-12 py-4 text-lg font-semibold rounded-xl" asChild>
-              <Link to="/contact">
-                Learn More
-              </Link>
-            </Button>
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-primary to-secondary">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="scroll-animate">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
+              Ready to Transform Your Career?
+            </h2>
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              Join thousands of talents and companies who have already discovered the Pekamy difference.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button 
+                size="lg" 
+                variant="secondary"
+                className="px-8 py-4 text-lg font-semibold rounded-xl"
+                asChild
+              >
+                <Link to="/screening">
+                  Start Your Journey
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Link>
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="border-2 border-white text-white px-8 py-4 text-lg font-semibold rounded-xl hover:bg-white/10"
+                asChild
+              >
+                <Link to="/contact">
+                  Partner With Us
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Use the Footer component instead of inline footer */}
+      {/* Footer */}
       <Footer />
 
       {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-50 btn-modern p-3 rounded-full shadow-lg"
-        >
-          <ArrowUp className="w-5 h-5" />
-        </button>
-      )}
-
-      {/* CSS Styles */}
-      <style>{`
-        .scroll-animate {
-          opacity: 0;
-          transform: translateY(30px);
-          transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-        
-        .scroll-animate.in-view {
-          opacity: 1;
-          transform: translateY(0);
-        }
-        
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .hero-reveal {
-          opacity: 0;
-          transform: translateY(50px);
-          animation: fadeInUp 1s ease-out forwards;
-        }
-        
-        .hero-reveal-delay-1 {
-          animation-delay: 0.3s;
-        }
-        
-        .hero-reveal-delay-2 {
-          animation-delay: 0.6s;
-        }
-        
-        .hero-reveal-delay-3 {
-          animation-delay: 0.9s;
-        }
-        
-        .floating-badge {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-20px); }
-        }
-        
-        .page-enter {
-          animation: pageEnter 0.8s ease-out forwards;
-        }
-        
-        @keyframes pageEnter {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        .modern-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-          gap: 2rem;
-        }
-        
-        .modern-card {
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          transition: all 0.3s ease;
-        }
-        
-        .modern-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .glass-effect {
-          background: rgba(255, 255, 255, 0.1);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-modern {
-          background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-          color: hsl(var(--primary-foreground));
-          border: none;
-          transition: all 0.3s ease;
-        }
-        
-        .btn-modern:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .text-gradient {
-          background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-        
-        .display-text {
-          font-size: clamp(4rem, 8vw, 8rem);
-          font-weight: 900;
-          letter-spacing: -0.02em;
-          line-height: 0.9;
-        }
-      `}</style>
+      <Button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 w-12 h-12 rounded-full glass-effect transition-all duration-300 ${
+          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}
+        size="icon"
+      >
+        <ArrowUp className="w-5 h-5" />
+      </Button>
     </div>
   );
 };

@@ -40,7 +40,7 @@ const Screening = () => {
   const tracks = {
     'fast-track': {
       title: 'Fast-Track Program',
-      duration: '3 Months',
+      duration: '12 Weeks',
       description: 'For candidates with strong foundational skills who are ready for immediate professional challenges and rapid career acceleration.',
       color: 'from-[#9a4eae] to-[#7a3e8e]',
       icon: <Rocket className="w-6 h-6" />,
@@ -56,7 +56,7 @@ const Screening = () => {
     },
     'standard': {
       title: 'Standard Program',
-      duration: '6 Months',
+      duration: '26 Weeks',
       description: 'Comprehensive development program for candidates who need structured time to build their skills and professional confidence.',
       color: 'from-[#8a46a0] to-[#6a3686]',
       icon: <Target className="w-6 h-6" />,
@@ -72,7 +72,7 @@ const Screening = () => {
     },
     'extended': {
       title: 'Extended Program',
-      duration: '9+ Months',
+      duration: '39 Weeks',
       description: 'In-depth program for candidates starting from beginner level, with continuous support and flexible learning paths.',
       color: 'from-[#7a3e92] to-[#5a2e72]',
       icon: <BookOpen className="w-6 h-6" />,
@@ -342,10 +342,18 @@ const Screening = () => {
         </div>
       </header>
 
-      {/* Header with proper spacing - Enhanced with HTML content */}
-      <section className="pt-28 pb-16 px-4 bg-gradient-to-r from-[#9a4eae] via-[#2f0033] to-[#9a4eae] text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+      {/* Header with proper spacing - Enhanced with background image */}
+      <section className="pt-28 pb-16 px-4 relative overflow-hidden bg-cover bg-center bg-no-repeat">
+        {/* Background Image with Overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("/images/trackbg.jpg")',
+          }}
+        >
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-gradient-to-r /80 via/80 to-[#9a4eae]/80"></div>
+        </div>
 
         {/* Floating badges */}
         <div className="absolute top-20 left-10 floating-badge hidden lg:block">
@@ -386,13 +394,12 @@ const Screening = () => {
                 Government Approved Program
               </Badge>
               
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">Pekamy Entry Track</h1>
+              <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white">Pekamy Entry Track</h1>
               <div className="text-3xl md:text-4xl font-bold mb-8 text-purple-200">PET</div>
             </div>
             
             <div className="hero-reveal hero-reveal-delay-1">
-              {/* Hero content from HTML */}
-              <h2 className="hero-title text-3xl md:text-4xl font-bold mb-8">Discover, Learn, and Grow with Entry Track</h2>
+              <h2 className="hero-title text-3xl md:text-4xl font-bold mb-8 text-white">Discover, Learn, and Grow with Entry Track</h2>
             </div>
             
             <div className="hero-reveal hero-reveal-delay-2">
@@ -412,17 +419,19 @@ const Screening = () => {
                 </div>
               </div>
 
-              <p className="text-lg md:text-xl opacity-95 max-w-4xl mx-auto mb-12 leading-relaxed">
+              <p className="text-lg md:text-xl opacity-95 max-w-4xl mx-auto mb-12 leading-relaxed text-white">
                 The <strong>Pekamy Entry Track (PET)</strong> is our flagship onboarding framework designed to guide new talents — especially students, fresh graduates, and aspiring professionals — through a structured, mentorship-driven development journey into the modern workforce.
               </p>
             </div>
             
             <div className="hero-reveal hero-reveal-delay-3 flex flex-col sm:flex-row gap-6 justify-center">
               <Button size="lg" className="bg-white text-[#9a4eae] hover:bg-white/90 hover:scale-105 transition-all duration-300 px-8 py-4 text-lg font-semibold">
+              <a href="https://forms.gle/p7aTwAfYGovz4MvP8" target="_blank" rel="noopener noreferrer">
                 Apply Now
+                </a>
                 <ArrowRight className="ml-2 w-6 h-6" />
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-[#9a4eae] hover:scale-105 transition-all duration-300 px-8 py-4 text-lg font-semibold">
+              <Button size="lg" variant="outline" className="border-2 border-white text-[#9a4aea] hover:bg-white hover:text-[#9a4eae] hover:scale-105 transition-all duration-300 px-8 py-4 text-lg font-semibold">
                 <Play className="mr-2 w-6 h-6" />
                 Watch Demo
               </Button>

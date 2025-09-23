@@ -204,9 +204,15 @@ const Blog = () => {
         </div>
       </header>
 
-      {/* Modern Hero Section */}
-      <section className="pt-28 pb-16 px-4 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+      {/* Modern Hero Section with Background Image */}
+      <section 
+        className="pt-28 pb-16 px-4 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('/images/mentorship.jpg')"
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30"></div>
         
         {/* Floating Badges */}
         <div className="absolute top-20 left-10 floating-badge hidden lg:block">
@@ -241,17 +247,17 @@ const Blog = () => {
                 <BookOpen className="w-10 h-10" />
               </div>
             </div>
-            <h1 className="display-text text-gradient mb-6">
+            <h1 className="display-text text-white mb-6">
               BLOG
             </h1>
           </div>
           <div className="hero-reveal hero-reveal-delay-1">
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
               The <span className="text-gradient">Freshminds</span> Journal
             </h2>
           </div>
           <div className="hero-reveal hero-reveal-delay-2">
-            <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed">
               Stories, solutions, and insights from the heart of Pekamy's mission to empower youth
             </p>
           </div>
@@ -259,30 +265,31 @@ const Blog = () => {
           {/* Blog Stats - Similar to Home Hero */}
           <div id="blog-hero-stats" className="hero-reveal hero-reveal-delay-3 grid grid-cols-3 gap-8 max-w-2xl mx-auto py-8">
             <div className="text-center">
-              <span className="text-3xl sm:text-4xl font-bold text-gradient">{blogArticlesCount}+</span>
-              <span className="block text-sm text-muted-foreground">Articles Published</span>
+              <span className="text-3xl sm:text-4xl font-bold text-white">{blogArticlesCount}+</span>
+              <span className="block text-sm text-white/80">Articles Published</span>
             </div>
             <div className="text-center">
-              <span className="text-3xl sm:text-4xl font-bold text-gradient">{blogReadersCount}K+</span>
-              <span className="block text-sm text-muted-foreground">Monthly Readers</span>
+              <span className="text-3xl sm:text-4xl font-bold text-white">{blogReadersCount}K+</span>
+              <span className="block text-sm text-white/80">Monthly Readers</span>
             </div>
             <div className="text-center">
-              <span className="text-3xl sm:text-4xl font-bold text-gradient">{blogRatingCount.toFixed(1)}</span>
-              <span className="block text-sm text-muted-foreground">Average Rating</span>
+              <span className="text-3xl sm:text-4xl font-bold text-white">{blogRatingCount.toFixed(1)}</span>
+              <span className="block text-sm text-white/80">Average Rating</span>
             </div>
           </div>
         </div>
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
 
+      {/* Rest of the component remains the same */}
       {/* Search and Filter Section */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <div className="scroll-animate mb-12">
             <div className="flex flex-col md:flex-row gap-6 items-center justify-between">

@@ -205,9 +205,15 @@ const Contact = () => {
         </div>
       </header>
 
-      {/* Modern Hero Section */}
-      <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10">
-        <div className="absolute inset-0 bg-[var(--gradient-mesh)] opacity-50"></div>
+      {/* Modern Hero Section with Background Image - Updated padding to match Blog page */}
+      <section 
+        className="pt-28 pb-16 px-4 relative overflow-hidden bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url('/images/contactbg.jpg')"
+        }}
+      >
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/30"></div>
         
         {/* Floating badges */}
         <div className="absolute top-20 left-10 floating-badge hidden lg:block">
@@ -242,19 +248,19 @@ const Contact = () => {
                 <HeartHandshake className="w-10 h-10 sm:w-12 sm:h-12" />
               </div>
             </div>
-            <h1 className="display-text text-gradient mb-6">
+            <h1 className="display-text text-white mb-6">
               CONTACT
             </h1>
           </div>
           
           <div className="hero-reveal hero-reveal-delay-1">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               Let's Build Something <span className="text-gradient">Amazing</span> Together
             </h2>
           </div>
           
           <div className="hero-reveal hero-reveal-delay-2">
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8 px-4">
+            <p className="text-lg sm:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed mb-8 px-4">
               Ready to transform your career or find exceptional talent? We're here to help you succeed.
             </p>
           </div>
@@ -262,30 +268,30 @@ const Contact = () => {
           {/* Contact Stats - Mobile Optimized */}
           <div id="contact-hero-stats" className="hero-reveal hero-reveal-delay-3 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto py-8 px-4">
             <div className="text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">{contactResponseCount}hr</span>
-              <span className="block text-sm text-muted-foreground">Response Time</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{contactResponseCount}hr</span>
+              <span className="block text-sm text-white/80">Response Time</span>
             </div>
             <div className="text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">{contactChannelsCount}+</span>
-              <span className="block text-sm text-muted-foreground">Contact Channels</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{contactChannelsCount}+</span>
+              <span className="block text-sm text-white/80">Contact Channels</span>
             </div>
             <div className="text-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient">{contactSatisfactionCount}%</span>
-              <span className="block text-sm text-muted-foreground">Satisfaction Rate</span>
+              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">{contactSatisfactionCount}%</span>
+              <span className="block text-sm text-white/80">Satisfaction Rate</span>
             </div>
           </div>
         </div>
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-primary rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
           </div>
         </div>
       </section>
 
       {/* Contact Form and Info Section - Mobile Optimized */}
-      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="container mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             
